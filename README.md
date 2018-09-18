@@ -1,2 +1,5 @@
-# job4j
- imaginegeek
+https://job4j.ru/index.html
+цели:
+Уровень стажер до 25.10.18
+Уровень "Junior" до 25.12.18
+и.т.д.
