@@ -3,4 +3,8 @@
 	email = imaginegeek57@gmail.com
 	nane = imaginegeek57
 
+.idea
+
+*.iml
+
 -target
