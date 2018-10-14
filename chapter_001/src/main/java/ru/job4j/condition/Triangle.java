@@ -41,6 +41,7 @@ public class Triangle {
             // написать формулу для расчета площади треугольника.
             rsl = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));  //вместо многоточия нужно написать формулу Герона с подставленными переменные ab, ac, dc, p.
             // Для извлечение квадратного корня надо использовать метод Math.sqrt()
+            }
             return rsl;
         }
 
@@ -54,8 +55,9 @@ public class Triangle {
          * @param bc Длина от точки b c.
          * @return
          */
-        private boolean exist(double ab, double ac, double bc);
-            return false;
+        private boolean exist(double ab, double ac, double bc) {
+                return ab + ac != bc;
         }
     }
-}
+
+
