@@ -1,7 +1,6 @@
 package ru.job4j.loop;
 
 import org.junit.Test;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,9 +16,9 @@ public class CounterTest {
      * Test
      */
     @Test
-    public int count(int start, int finish) {
+    public void count() {
         Counter counter = new Counter();
-        int result = counter.count(0, 30);
+        int result = counter.count(0, 10);
         assertThat(result, is(30));
 
     }
