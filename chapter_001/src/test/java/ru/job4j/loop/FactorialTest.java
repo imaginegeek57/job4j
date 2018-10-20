@@ -25,5 +25,13 @@ public class FactorialTest {
 
     }
 
-}
 
+    @Test
+    public void other() {
+        Factorial factorial = new Factorial();
+        int result = factorial.calc(-5);
+        assertThat(result, is(1));
+
+    }
+
+}
