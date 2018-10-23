@@ -8,11 +8,11 @@ public class Board {
         public String paint(int width, int height) {
             StringBuilder screen = new StringBuilder();
             String ln = System.lineSeparator();
-            for (int j = 0; j < 3; j++) {
-                for (int i = 0; i < 3; i++) {
-                    if (i % 2 == 0) {
+            for (int j = 0; j < height; j++) {
+                for (int i = 0; i < width; i++) {
+                    if ((j + i) % 2 == 0) {
                         screen.append("X");
-                    } else {
+                    } else  {
                         screen.append(" ");
                     }
                 }
