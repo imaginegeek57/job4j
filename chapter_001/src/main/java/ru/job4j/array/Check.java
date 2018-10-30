@@ -10,8 +10,11 @@ public class Check {
     public boolean mono(boolean[] data) {
         boolean result = false;
        for (int i = 0; i < data.length; i++) {
-           data[i] = true;
-      }
-        return result;
+            if (data[i] != data[0]) {
+                break;
+            }
+       }
+       return result;
+
     }
 }
