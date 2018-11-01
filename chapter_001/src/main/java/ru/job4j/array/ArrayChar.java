@@ -12,22 +12,24 @@ public class ArrayChar {
 
     public ArrayChar(String line) {
         this.data = line.toCharArray();
+// здесь должен быть еще 1 цикл?
     }
-    /**
-     * Проверяет. что слово начинается с префикса.
-     * @param prefix префикс.
-     * @return если слово начинается с префикса
-     */
+
+
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-        if (data != value) {
-            result = false;
+        for (int i = 0; i < value.length; i++) {
+            if (data[i] != value.length) {
+                result = false;
+                break;
+            }
         }
         return result;
     }
-
 }
+
+
 
 
 
