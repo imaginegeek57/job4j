@@ -17,7 +17,7 @@ public class BubbleSortTest {
         public void whenIable() {
             BubbleSort bubble = new BubbleSort();
             int[] input = new int[] {4, 1, 6, 2};
-            int result = bubble.sort(input[]);
+            int[] result = bubble.sort(input);
             int[] expect = new int[] {1, 2, 4, 6};
             assertThat(result, is(expect));
         }
