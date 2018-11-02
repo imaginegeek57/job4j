@@ -17,6 +17,6 @@ public class BubbleSort {
 
             }
         }
-        return tmp;
+        return array;
     }
 }
