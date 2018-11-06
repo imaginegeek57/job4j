@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
  * @version $Id$
  * @since 0.1
  */
+
 public class MatrixCheckTest {
     @Test
     public void whenDataMonoByTrueThenTrue() {
