@@ -24,16 +24,13 @@ public class Tracker extends Item {
             item.setId(this.generateId());
             this.items[this.position++] = item;
             return item;
-
-            /**
-             * Метод
-              */
         }
+        // Метод добавляет заявку в
         public Item findById(String id) {
             Item result = null;
-            for(Item item : items) {
-                if(items != null && item.getId().equals(id)) {
-                    result =item;
+            for(int i = 0; i < position; i++) {
+                if(items[i].getId().equals(id)) {
+                    result =items[i];
                     break;
                 }
             }
@@ -49,5 +46,26 @@ public class Tracker extends Item {
 
             return null;
         }
-
+        // Метод должен заменить ячейку в массиве this.items
+        public void replace(String id, Item item) {
+            this.items[this.position++] = item;
+            Item result = null;
+                for(int i = 0; i < position; i++) {
+                    if(items[position].getId().equals(id)) {
+                        result = items[position];
+                        break;
+                    }
+            }
+        }
+        //должен удалить ячейку в массиве this.items
+    // необходимо использовать arraycopy но не знаю как его реализовать...
+        public void delete(String id) {
+            Item result = null;
+            for(int i = 0; i < position; i++) {
+                if(items[i].getId().equals(id)) {
+                    result =items[i];
+                    break;
+                }
+            }
+        }
 }

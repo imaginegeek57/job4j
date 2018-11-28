@@ -6,10 +6,10 @@ package ru.job4j.tracker;
  */
 public class Item {
     private String id;
-    public String name;
-    public String description;
-    public long create;
-    public String[] comments;
+    private String name;
+    private String description;
+    private long create;
+    private String[] comments;
     public Item() {
     }
     public Item(String name, String description, long create, String[] comments) {
