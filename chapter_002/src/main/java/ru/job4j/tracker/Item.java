@@ -5,6 +5,7 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 public class Item {
+    protected static int length;
     private String id;
     private String name;
     private String description;
@@ -35,4 +36,5 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
+
 }

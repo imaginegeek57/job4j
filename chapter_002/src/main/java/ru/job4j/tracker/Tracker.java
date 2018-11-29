@@ -49,10 +49,10 @@ public class Tracker extends Item {
         // Метод должен заменить ячейку в массиве this.items
         public void replace(String id, Item item) {
             this.items[this.position++] = item;
-            Item result = null;
                 for(int i = 0; i < position; i++) {
-                    if(items[position].getId().equals(id)) {
-                        result = items[position];
+                    if(items[i].getId().equals(id)) {
+                        items[i] = item;
+                        item.setId(id);
                         break;
                     }
             }
@@ -60,12 +60,16 @@ public class Tracker extends Item {
         //должен удалить ячейку в массиве this.items
     // необходимо использовать arraycopy но не знаю как его реализовать...
         public void delete(String id) {
-            Item result = null;
-            for(int i = 0; i < position; i++) {
-                if(items[i].getId().equals(id)) {
-                    result =items[i];
-                    break;
+            int Item = items.length;
+            for(int i = 0; i < Item; i++) {
+                for(int j; j < Item; j++) {
+                    if (items[i].equals(items[j])) {
+                        items[i] = items[Item - 1];
+                        Item--;
+                        i--;
+                    }
                 }
+                Arrays.copyOf(items, Item);
             }
         }
 }
