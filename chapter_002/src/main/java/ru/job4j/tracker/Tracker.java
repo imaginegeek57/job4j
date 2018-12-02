@@ -42,34 +42,33 @@ public class Tracker extends Item {
          * @return Уникальный ключ.
          */
         private String generateId() {
-            String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
-
-            return null;
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
         }
         // Метод должен заменить ячейку в массиве this.items
         public void replace(String id, Item item) {
-            this.items[this.position++] = item;
-                for(int i = 0; i < position; i++) {
-                    if(items[i].getId().equals(id)) {
-                        items[i] = item;
-                        item.setId(id);
-                        break;
-                    }
+            for (int i = 0; i < position; i++) {
+                if (items[i].getId().equals(id)) {
+                    items[i] = item;
+                    item.setId(id);
+                    break;
+                }
             }
         }
-        //должен удалить ячейку в массиве this.items
-    // необходимо использовать arraycopy но не знаю как его реализовать...
-        public void delete(String id) {
-            int Item = items.length;
-            for(int i = 0; i < Item; i++) {
-                for(int j; j < Item; j++) {
-                    if (items[i].equals(items[j])) {
-                        items[i] = items[Item - 1];
-                        Item--;
-                        i--;
-                    }
-                }
-                Arrays.copyOf(items, Item);
+            //должен удалить ячейку в массиве this.items
+        public void delete (String id) {
+            for (int i = 0; i < position; i++) {
+                 if (items[i].getId().equals(id)) {
+                 System.arraycopy(items, i + 1, items, i, items.length - 1 - i);
+                   position--;
+                   break;
+                 }
             }
+        }
+        public Item[] findAll() {
+            Item[] result = new Item[this.position];
+            for (int index = 0; index != this.position; index++) {
+                result[index] = this.items[index];
+            }
+            return result;
         }
 }
