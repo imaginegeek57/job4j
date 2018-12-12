@@ -25,7 +25,18 @@ public class Tracker extends Item {
             this.items[this.position++] = item;
             return item;
         }
-        // Метод добавляет заявку в
+         // Метод добавляет заявку по имени
+        public Item[] findByName(String key) {
+            Item result = null;
+            for(int i = 0; i < position; i++) {
+                if(items[i].getName().equals(key)) {
+                    result =items[i];
+                    break;
+                }
+            }
+            return result;
+        }
+        // Метод добавляет заявку по id
         public Item findById(String id) {
             Item result = null;
             for(int i = 0; i < position; i++) {

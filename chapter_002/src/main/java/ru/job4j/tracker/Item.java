@@ -10,16 +10,16 @@ public class Item {
     private String name;
     private String description;
     private long create;
+    private String delete;
     private String[] comments;
     public Item() {
     }
-    public Item(String name, String description, long create, String[] comments) {
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.create = create;
     }
     public String getName() {
-        return this.name;
+            return this.name;
     }
     public String getDescription() {
         return this.description;
@@ -36,5 +36,7 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
-
+    public String getDelete() {
+        return this.delete;
+    }
 }

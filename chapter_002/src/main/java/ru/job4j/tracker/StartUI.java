@@ -61,38 +61,53 @@ public class StartUI {
         System.out.println("------------ Добавление новой заявки --------------");
         String name = this.input.ask("Введите имя заявки");
         String desc = this.input.ask("Введите описание заявки");
-        Item item = new Item(name,desc);
+        Item item = new Item(name, desc);
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
     }
+
     // метод удаляет заявку
     private void delete() {
         System.out.println("--------Удаление заявки--------");
-        String name = this.input.ask("Введите имя заявки :");
-        //.....?
-        this.tracker.delete(name);
-    }
-    private Item findById(String id) {
-        //...?
+        String id = this.input.ask("Введите id заявки :");
+        this.tracker.delete(id);
     }
 
-    private void showMenu() {
-        System.out.println("Меню.");
-        System.out.println("Добавление новой заявки");
-        System.out.println("поиск заявки по имени");
-        System.out.println("поиск заявки по id");
-        System.out.println("удаление заявки");
-        System.out.println("Меню.");
-        final String EXIT = "6";
-        final String ADD = "0";
-        // это не правильно ?
+    // метод ищет заявку по id
+    private void findById() {
+        String id = this.input.ask("Введите id заявки :");
+        Item byId = tracker.findById(id);
+        if (byId != null) {
+            System.out.println(byId);
+        } else {
+            System.out.println("Item not found");
+        }
     }
+        private void findByName() {
+            String name = this.input.ask("Введите имя заявки");
+            Item byName = tracker.findByName(name);
 
-    /**
-     * Запускт программы.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
-    }
+
+
+        }
+        private void showMenu () {
+            System.out.println("Меню.");
+            System.out.println("Добавление новой заявки");
+            System.out.println("поиск заявки по имени");
+            System.out.println("поиск заявки по id");
+            System.out.println("удаление заявки");
+            System.out.println("Меню.");
+            final String EXIT = "6";
+            final String ADD = "0";
+            // это не правильно ?
+        }
+
+        /**
+         * Запускт программы.
+         * @param args
+         */
+        public static void main (String[] args) {
+            new StartUI(new ConsoleInput(), new Tracker()).init();
+        }
+
 }
