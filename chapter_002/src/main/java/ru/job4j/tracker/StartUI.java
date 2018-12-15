@@ -4,12 +4,20 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 0.1
  */
+import java.util.*;
 public class StartUI {
     /**
      * Константа меню для добавления новой заявки.
      */
-    private static final String ADD = "0";
-
+    private static final String ADD = "1";
+    // Константа для для поиска по имени
+    private static final String FIND_BY_NAME = "2";
+    // Константа для для удаления
+    private static final String DELETE = "4";
+    //Константа показать все
+    private static final String FIND_ALL = "5";
+    // Константа для для поиска по id
+    private static final String FIND_BY_ID = "3";
     /**
      * Константа для выхода из цикла.
      */
@@ -34,7 +42,6 @@ public class StartUI {
         this.input = input;
         this.tracker = tracker;
     }
-
     /**
      * Основой цикл программы.
      */
@@ -46,14 +53,19 @@ public class StartUI {
             if (ADD.equals(answer)) {
                 //добавление заявки вынесено в отдельный метод.
                 this.createItem();
-//            } else if (...) {
-//             Добавить остальные действия системы по меню.
+            } else if (FIND_BY_ID.equals(answer)) {
+                findById();
+            } else if (FIND_BY_NAME.equals(answer)) {
+                findByName();
+            } else if (DELETE.equals(answer)) {
+                delete();
+            } else if (FIND_ALL.equals(answer)) {
+                findAll();
             } else if (EXIT.equals(answer)) {
                 exit = true;
             }
         }
     }
-
     /**
      * Метод реализует добавленяи новый заявки в хранилище.
      */
@@ -83,23 +95,33 @@ public class StartUI {
             System.out.println("Item not found");
         }
     }
-        private void findByName() {
-            String name = this.input.ask("Введите имя заявки");
-            Item byName = tracker.findByName(name);
-
-
-
+    private void findByName() {
+        String name = this.input.ask("Введите имя заявки");
+        Item[] byName = this.tracker.findByName(name);
+        if (byName.length != 0) {
+            for (Item item : byName) {
+                System.out.println(item);
+            }
+            } else {
+            System.out.println("Заявок с данным именем не найдено");
+            }
         }
-        private void showMenu () {
+        private void findAll() {
+        Item[] all = this.tracker.findAll();
+        if (all.length != 0) {
+            for (Item item : all) {
+                System.out.println("Трекер пуст заявок нет");
+            }
+        }
+        }
+        private void showMenu() {
             System.out.println("Меню.");
-            System.out.println("Добавление новой заявки");
-            System.out.println("поиск заявки по имени");
-            System.out.println("поиск заявки по id");
-            System.out.println("удаление заявки");
-            System.out.println("Меню.");
-            final String EXIT = "6";
-            final String ADD = "0";
-            // это не правильно ?
+            System.out.println("1.Добавление новой заявки");
+            System.out.println("2.Поиск заявки по имени");
+            System.out.println("3.Поиск заявки по id");
+            System.out.println("4.Удаление заявки");
+            System.out.println("5.Показать все заявки");
+            System.out.println("6.Выход");
         }
 
         /**
