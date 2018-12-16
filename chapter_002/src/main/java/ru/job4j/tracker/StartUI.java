@@ -9,15 +9,17 @@ public class StartUI {
     /**
      * Константа меню для добавления новой заявки.
      */
-    private static final String ADD = "1";
+    private static final String ADD = "0";
     // Константа для для поиска по имени
-    private static final String FIND_BY_NAME = "2";
+    private static final String FIND_BY_NAME = "5";
     // Константа для для удаления
-    private static final String DELETE = "4";
+    private static final String DELETE = "3";
     //Константа показать все
-    private static final String FIND_ALL = "5";
+    private static final String FIND_ALL = "1";
     // Константа для для поиска по id
-    private static final String FIND_BY_ID = "3";
+    private static final String FIND_BY_ID = "4";
+
+    private static final String REPLACE = "2";
     /**
      * Константа для выхода из цикла.
      */
@@ -26,12 +28,10 @@ public class StartUI {
      * Получение данных от пользователя.
      */
     private final Input input;
-
     /**
      * Хранилище заявок.
      */
     private final Tracker tracker;
-
     /**
      * Конструтор инициализирующий поля.
      *
