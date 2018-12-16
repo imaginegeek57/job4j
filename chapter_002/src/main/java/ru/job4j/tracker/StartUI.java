@@ -59,6 +59,8 @@ public class StartUI {
                 findByName();
             } else if (DELETE.equals(answer)) {
                 delete();
+            } else if (REPLECE.equals(answer)) {
+                replace();
             } else if (FIND_ALL.equals(answer)) {
                 findAll();
             } else if (EXIT.equals(answer)) {
@@ -77,7 +79,6 @@ public class StartUI {
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
     }
-
     // метод удаляет заявку
     private void delete() {
         System.out.println("--------Удаление заявки--------");
@@ -85,14 +86,15 @@ public class StartUI {
         this.tracker.delete(id);
     }
     // Обновление заявки
-    private void update() {
+    private void replace() {
         String name = this.input.ask("Введите имя заявки");
         String id = this.input.ask("Введите id заявки :");
         String desc = this.input.ask("Введите описание заявки");
-        Item item = new Item(id, desc, name);
-        // ....?
+        Item item = new Item(name, desc);
+        this.tracker.replace(id, item);
     }
     // метод ищет заявку по id
+
     private void findById() {
         String id = this.input.ask("Введите id заявки :");
         Item byId = tracker.findById(id);
@@ -123,11 +125,12 @@ public class StartUI {
         }
         private void showMenu() {
             System.out.println("Меню.");
-            System.out.println("1.Добавление новой заявки");
-            System.out.println("2.Поиск заявки по имени");
-            System.out.println("3.Поиск заявки по id");
-            System.out.println("4.Удаление заявки");
-            System.out.println("5.Показать все заявки");
+            System.out.println("0.Добавление новой заявки");
+            System.out.println("1.Показать все заявки");
+            System.out.println("2.Редактировать заявку");
+            System.out.println("3.Удаление заявки");
+            System.out.println("4.Поиск заявки по id");
+            System.out.println("5.Поиск заявки по имени");
             System.out.println("6.Выход");
         }
 

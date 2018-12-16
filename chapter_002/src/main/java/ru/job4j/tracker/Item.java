@@ -23,6 +23,7 @@ public class Item {
         this.description = description;
         this.id = id;
     }
+
         public String getName() {
             return this.name;
     }
