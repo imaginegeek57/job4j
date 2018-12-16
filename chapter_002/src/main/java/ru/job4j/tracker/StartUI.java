@@ -59,7 +59,7 @@ public class StartUI {
                 findByName();
             } else if (DELETE.equals(answer)) {
                 delete();
-            } else if (REPLECE.equals(answer)) {
+            } else if (REPLACE.equals(answer)) {
                 replace();
             } else if (FIND_ALL.equals(answer)) {
                 findAll();
