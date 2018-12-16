@@ -18,7 +18,12 @@ public class Item {
         this.name = name;
         this.description = description;
     }
-    public String getName() {
+    public Item(String name, String description, String id) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+    }
+        public String getName() {
             return this.name;
     }
     public String getDescription() {

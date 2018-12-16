@@ -84,7 +84,14 @@ public class StartUI {
         String id = this.input.ask("Введите id заявки :");
         this.tracker.delete(id);
     }
-
+    // Обновление заявки
+    private void update() {
+        String name = this.input.ask("Введите имя заявки");
+        String id = this.input.ask("Введите id заявки :");
+        String desc = this.input.ask("Введите описание заявки");
+        Item item = new Item(id, desc, name);
+        // ....?
+    }
     // метод ищет заявку по id
     private void findById() {
         String id = this.input.ask("Введите id заявки :");
