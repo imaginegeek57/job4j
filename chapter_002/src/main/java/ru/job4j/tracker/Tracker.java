@@ -28,9 +28,9 @@ public class Tracker extends Item {
         // Метод добавляет заявку по id
         public Item findById(String id) {
             Item result = null;
-            for(int i = 0; i < position; i++) {
-                if(items[i].getId().equals(id)) {
-                    result =items[i];
+            for (int i = 0; i < position; i++) {
+                if (items[i].getId().equals(id)) {
+                    result = items[i];
                     break;
                 }
             }
@@ -55,7 +55,7 @@ public class Tracker extends Item {
             }
         }
             //должен удалить ячейку в массиве this.items
-        public void delete (String id) {
+        public void delete(String id) {
             for (int i = 0; i < position; i++) {
                  if (items[i].getId().equals(id)) {
                  System.arraycopy(items, i + 1, items, i, items.length - 1 - i);
@@ -72,7 +72,7 @@ public class Tracker extends Item {
                     result[count] = items[i];
                 }
             }
-            return Arrays.copyOf(result,count);
+            return Arrays.copyOf(result, count);
         }
 
         public Item[] findAll() {
