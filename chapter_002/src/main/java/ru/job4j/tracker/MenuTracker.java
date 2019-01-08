@@ -120,6 +120,7 @@ public class MenuTracker {
     }
     private class ShowItems implements UserAction {
         private int key;
+
         public ShowItems(int key) {
             this.key = key;
         }
@@ -223,18 +224,15 @@ public class MenuTracker {
         public int key() {
             return 6;
         }
-
         @Override
         public void execute(Input input, Tracker tracker) {
-
-            //.....
-            //.....?
+            System.out.println("Выбран пункт Exit Program, досвидания!");
+            select(key);
         }
-            @Override
-            public String info () {
-                return "Exit Program.";
-            }
-
+        @Override
+        public String info() {
+            return "Exit Program.";
+        }
     }
 }
 
