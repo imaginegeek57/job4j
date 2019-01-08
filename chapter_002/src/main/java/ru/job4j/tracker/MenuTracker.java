@@ -96,7 +96,6 @@ public class MenuTracker {
     private class UpdateItem implements UserAction {
         private int key;
         private String name;
-
         public UpdateItem(int key, String name) {
             this.key = key;
             this.name = name;
@@ -120,9 +119,11 @@ public class MenuTracker {
     }
     private class ShowItems implements UserAction {
         private int key;
+        private String name;
 
-        public ShowItems(int key) {
+        public ShowItems(int key, String name) {
             this.key = key;
+            this.name = name;
         }
         @Override
         public int key() {
@@ -217,8 +218,10 @@ public class MenuTracker {
     }
     private class ExitProgram implements UserAction {
         private int key;
-        public ExitProgram(int key) {
+        private String name;
+        public ExitProgram(int key, String name) {
             this.key = key;
+            this.name =name;
         }
         @Override
         public int key() {
