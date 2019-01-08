@@ -67,9 +67,15 @@ public class MenuTracker {
             }
         }
     }
-
-    public class AddItem implements UserAction {
-        @Override
+    private class AddItem implements UserAction {
+        private int key;
+        private String name;
+        private String desc;
+        public AddItem(int key, String name,String desc) {
+            this.key = key;
+            this.name = name;
+            this.desc= desc;
+        }
         public int key() {
             return 0;
         }
@@ -82,23 +88,34 @@ public class MenuTracker {
             tracker.add(item);
             System.out.println("------------ New Item with Id : " + item.getId());
             System.out.println("------------ New Item with Name : " + item.getName());
-            System.out.println("------------ New Item with Description : " + item.getDesc());
+            System.out.println("------------ New Item with Description : " + item.getDescription());
         }
         @Override
         public String info() {
             return "Add new Item.";
         }
     }
-    public class UpdateItem implements UserAction {
+    private class UpdateItem implements UserAction {
+        private int key;
+        private String name;
+        private String desc;
+        private String id;
+
+        public UpdateItem(int key, String name,String desc, String id) {
+            this.key = key;
+            this.name = name;
+            this.desc= desc;
+            this.id = id;
+        }
         @Override
         public int key() {
             return 2;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            String name = this.input.ask("Введите имя заявки");
-            String id = this.input.ask("Введите id заявки :");
-            String desc = this.input.ask("Введите описание заявки");
+            String name = input.ask("Введите имя заявки");
+            String id = input.ask("Введите id заявки :");
+            String desc = input.ask("Введите описание заявки");
             Item item = new Item(id, name, desc);
             tracker.replace(item);
         }
@@ -107,15 +124,18 @@ public class MenuTracker {
             return "Update Item.";
         }
     }
-    public class ShowItems implements UserAction {
+    private class ShowItems implements UserAction {
+        private int key;
+        public ShowItems(int key) {
+            this.key = key;
+        }
         @Override
         public int key() {
             return 1;
         }
-
         @Override
         public void execute(Input input, Tracker tracker) {
-            for (UserAction action : this.actions)
+            for (UserAction action : actions)
                 if (action != null) {
                     System.out.println(action.info());
                 }
@@ -125,7 +145,13 @@ public class MenuTracker {
             return "Show Items.";
         }
     }
-    public class DeleteItem implements UserAction {
+    private class DeleteItem implements UserAction {
+        private int key;
+        private String id;
+        public DeleteItem(int key, String id) {
+            this.key = key;
+            this.id = id;
+        }
         @Override
         public int key() {
             return 3;
@@ -133,22 +159,28 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("--------Удаление заявки--------");
-            String id = this.input.ask("Введите id заявки :");
-            this.tracker.delete(id);
+            String id = input.ask("Введите id заявки :");
+            tracker.delete(id);
         }
         @Override
         public String info() {
             return "Delete Item.";
         }
     }
-    public class FindItemById implements UserAction {
+    private class FindItemById implements UserAction {
+        private int key;
+        private String id;
+        public FindItemById(int key, String id) {
+            this.key = key;
+            this.id = id;
+        }
         @Override
         public int key() {
             return 4;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = this.input.ask("Введите id заявки :");
+            String id = input.ask("Введите id заявки :");
             Item byId = tracker.findById(id);
             if (byId != null) {
                 System.out.println(byId);
@@ -161,15 +193,21 @@ public class MenuTracker {
             return "Find Items.";
         }
     }
-    public class FindItemsByName implements UserAction {
+    private class FindItemsByName implements UserAction {
+        private int key;
+        private String name;
+        public FindItemsByName(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
             return 5;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            String name = this.input.ask("Введите имя заявки");
-            Item[] byName = this.tracker.findByName(name);
+            String name = input.ask("Введите имя заявки");
+            Item[] byName = tracker.findByName(name);
             if (byName.length != 0) {
                 for (Item item : byName) {
                     System.out.println(item);
@@ -183,7 +221,7 @@ public class MenuTracker {
             return "Find items by name.";
         }
     }
-    public class ExitProgram implements UserAction {
+    private class ExitProgram implements UserAction {
         @Override
         public int key() {
             return 6;
