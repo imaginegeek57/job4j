@@ -41,7 +41,7 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.add(new AddItem(0, "Add program"));
+        this.actions.add(new AddItem(0,"Add program"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new UpdateItem(2, "Edit item"));
         this.actions.add(new DeleteItem(3, "Delete item"));
@@ -70,11 +70,9 @@ public class MenuTracker {
     private class AddItem implements UserAction {
         private int key;
         private String name;
-        private String desc;
-        public AddItem(int key, String name,String desc) {
+        public AddItem(int key, String name) {
             this.key = key;
             this.name = name;
-            this.desc= desc;
         }
         public int key() {
             return 0;
@@ -98,14 +96,10 @@ public class MenuTracker {
     private class UpdateItem implements UserAction {
         private int key;
         private String name;
-        private String desc;
-        private String id;
 
-        public UpdateItem(int key, String name,String desc, String id) {
+        public UpdateItem(int key, String name) {
             this.key = key;
             this.name = name;
-            this.desc= desc;
-            this.id = id;
         }
         @Override
         public int key() {
@@ -117,7 +111,7 @@ public class MenuTracker {
             String id = input.ask("Введите id заявки :");
             String desc = input.ask("Введите описание заявки");
             Item item = new Item(id, name, desc);
-            tracker.replace(item);
+            tracker.replace(id, item);
         }
         @Override
         public String info() {
@@ -135,14 +129,13 @@ public class MenuTracker {
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            for (UserAction action : actions)
-                if (action != null) {
-                    System.out.println(action.info());
-                }
+            for (Item item : tracker.findAll()) {
+                    System.out.println();
+            }
         }
         @Override
         public String info() {
-            return "Show Items.";
+            return "Show all Items.";
         }
     }
     private class DeleteItem implements UserAction {
@@ -222,18 +215,26 @@ public class MenuTracker {
         }
     }
     private class ExitProgram implements UserAction {
+        private int key;
+        public ExitProgram(int key) {
+            this.key = key;
+        }
         @Override
         public int key() {
             return 6;
         }
+
         @Override
         public void execute(Input input, Tracker tracker) {
-            // .....
+
+            //.....
+            //.....?
         }
-        @Override
-        public String info() {
-            return "Show Items.";
-        }
+            @Override
+            public String info () {
+                return "Exit Program.";
+            }
+
     }
 }
 

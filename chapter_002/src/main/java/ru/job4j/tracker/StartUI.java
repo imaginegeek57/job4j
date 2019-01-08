@@ -39,7 +39,7 @@ import java.util.*;
             }
             do {
                 menu.show();
-                menu.select(input.ask("select:", range));
+                menu.select(Integer.valueOf(input.ask("select:")));
             } while (!"y".equals(this.input.ask("Exit?(y): ")));
         }
         /**
