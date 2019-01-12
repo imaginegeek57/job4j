@@ -16,15 +16,16 @@ public class StubInput implements Input {
      * y - выйти из трекера.
      */
     private final String[] value;
-
+    private final Input input;
     /**
      * Поле считает количество вызовом метода ask.
      * При каждом вызове надо передвинуть указатель на новое число.
      */
     private int position;
 
-    public StubInput(final String[] value) {
+    public StubInput(final String[] value, Input input) {
         this.value = value;
+        this.input =input;
     }
 
     /**
@@ -38,6 +39,21 @@ public class StubInput implements Input {
     @Override
     public String ask(String question) {
         return this.value[this.position++];
+    }
+    public int ask(String question, int[] range) {
+        boolean invalid = true;
+        int value = -1;
+        do {
+            try {
+                value = this.input.ask(question, range);
+                invalid = false;
+            } catch (MenuOutException moe) {
+                System.out.println("Please select key from menu.");
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter validate data again.");
+            }
+        } while (invalid);
+        return value;
     }
 }
 

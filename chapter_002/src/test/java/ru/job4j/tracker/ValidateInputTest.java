@@ -36,4 +36,17 @@ public class ValidateInputTest {
                 )
         );
     }
+    @Test
+    public void whenInvalid() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"invalid", "-1"})
+        );
+        input.ask("Enter", new int[] {2});
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please enter validate data again.%n")
+                )
+        );
+    }
 }
