@@ -8,6 +8,7 @@ package ru.job4j.tracker;
 import java.util.*;
 
     public class StartUI {
+        private int[] ranges = new int[]{1, 2, 3, 4, 5, 6};
         /**
          * Получение данных от пользователя.
          */
@@ -27,28 +28,34 @@ import java.util.*;
             this.input = input;
             this.tracker = tracker;
         }
+
         /**
          * Основой цикл программы.
          */
         public void init() {
             MenuTracker menu = new MenuTracker(this.input, this.tracker);
-            List<Integer> range = new ArrayList<>();
+            List <Integer> range = new ArrayList <>();
             menu.fillActions();
             for (int i = 0; i < menu.getActionsLentgh(); i++) {
                 range.add(i);
             }
             do {
                 menu.show();
-                menu.select(Integer.valueOf(input.ask("select:")));
+                menu.select(Integer.valueOf(input.ask("select:", ranges)));
             } while (!"y".equals(this.input.ask("Exit?(y): ")));
         }
+
         /**
          * Запускт программы.
          *
          * @param args
          */
         public static void main(String[] args) {
-            new StartUI(new ConsoleInput(), new Tracker()).init();
+            new StartUI(
+                    new ValidateInput(
+                            new ConsoleInput()
+                    ),
+                    new Tracker()
+            ).init();
         }
-
     }
