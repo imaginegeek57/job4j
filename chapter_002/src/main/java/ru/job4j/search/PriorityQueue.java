@@ -16,10 +16,14 @@ public class PriorityQueue {
      */
     public void put(Task task) {
         LinkedList<Task> pq = new LinkedList <>();
+        int count = 0;
         for (Task  put : tasks) {
-            if (  ) {     // Вот тут что-то мысль не идет...
+            if (task.getPriority() < put.getPriority()) {
+                break;
             }
+            count++;
         }
+            pq.add(count, task);
     }
     public Task take() {
         return this.tasks.poll();
