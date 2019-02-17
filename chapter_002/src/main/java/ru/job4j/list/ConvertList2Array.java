@@ -7,14 +7,19 @@ package ru.job4j.list;
 import java.util.List;
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = 0;
-        for (Integer List: list) {
-            if(List % 2 != 0) {
-                cells = cells + 1;
+        int cells = list.size() / rows;
+        if (list.size() % rows != 0) {
+            cells = cells + 1;
         }
-            }
         int[][] array = new int[rows][cells];
+        int count = 0;
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array[i].length; j++) {
+                    if (count <array.length) {
+                        array[i][j] = list.get(count++);
+                    }
+                }
+            }
         return array;
     }
 }
-
