@@ -18,10 +18,10 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
-    private List <UserAction> actions = new ArrayList <>();
+    private ArrayList<UserAction> actions = new ArrayList<>();
     /**
      * Конструктор.
-     *
+     *1
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
      */
@@ -34,14 +34,14 @@ public class MenuTracker {
      *
      * @return длину массива
      */
-    public int getActionsLentgh() {
+    public int getActions() {
         return this.actions.size();
     }
     /**
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.add(new AddItem(0,"Add program"));
+        this.actions.add(new AddItem(0, "Add program"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new UpdateItem(2, "Edit item"));
         this.actions.add(new DeleteItem(3, "Delete item"));
@@ -67,30 +67,17 @@ public class MenuTracker {
             }
         }
     }
-    private class AddItem implements UserAction {
-        private int key;
-        private String name;
+    class AddItem extends BaseAction {
+
         public AddItem(int key, String name) {
-            this.key = key;
-            this.name = name;
+            super(key, name);
         }
-        public int key() {
-            return 0;
-        }
+
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Adding new item --------------");
-            String name = input.ask("Please, provide item name:");
-            String desc = input.ask("Please, provide item description:");
-            Item item = new Item(name, desc);
-            tracker.add(item);
-            System.out.println("------------ New Item with Id : " + item.getId());
-            System.out.println("------------ New Item with Name : " + item.getName());
-            System.out.println("------------ New Item with Description : " + item.getDescription());
-        }
-        @Override
-        public String info() {
-            return "Add new Item.";
+            String name = input.ask("Enter name:");
+            String desc = input.ask("Enter description:");
+            tracker.add(new Item(name, desc));
         }
     }
     private class UpdateItem implements UserAction {
@@ -221,7 +208,7 @@ public class MenuTracker {
         private String name;
         public ExitProgram(int key, String name) {
             this.key = key;
-            this.name =name;
+            this.name = name;
         }
         @Override
         public int key() {

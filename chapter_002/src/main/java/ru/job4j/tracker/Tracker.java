@@ -5,12 +5,12 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 import java.util.*;
-
+import java.util.ArrayList;
 public class Tracker extends Item {
         /**
          * Массив для хранение заявок.
          */
-        private final Item[] items = new Item[100];
+        private final ArrayList<Item> items = new ArrayList<>(100);
         private static final Random RN = new Random();
         /**
          * Указатель ячейки для новой заявки.
@@ -22,15 +22,15 @@ public class Tracker extends Item {
          */
         public Item add(Item item) {
             item.setId(this.generateId());
-            this.items[this.position++] = item;
+            this.items.set(this.position++, item);
             return item;
         }
         // Метод добавляет заявку по id
         public Item findById(String id) {
             Item result = null;
             for (int i = 0; i < position; i++) {
-                if (items[i].getId().equals(id)) {
-                    result = items[i];
+                if (items.get(i).getId().equals(id)) {
+                    result = items.get(i);
                     break;
                 }
             }
@@ -47,8 +47,8 @@ public class Tracker extends Item {
         // Метод должен заменить ячейку в массиве this.items
         public void replace(String id, Item item) {
             for (int i = 0; i < position; i++) {
-                if (items[i].getId().equals(id)) {
-                    items[i] = item;
+                if (items.get(i).getId().equals(id)) {
+                    items.get(i).equals(item);
                     item.setId(id);
                     break;
                 }
@@ -57,8 +57,8 @@ public class Tracker extends Item {
             //должен удалить ячейку в массиве this.items
         public void delete(String id) {
             for (int i = 0; i < position; i++) {
-                 if (items[i].getId().equals(id)) {
-                 System.arraycopy(items, i + 1, items, i, items.length - 1 - i);
+                 if (items.get(i).getId().equals(id)) {
+                 System.arraycopy(items, i + 1, items, i, items.size() - 1 - i);
                    position--;
                    break;
                  }
@@ -68,8 +68,8 @@ public class Tracker extends Item {
             Item[] result = new Item[position];
             int count = 0;
             for (int i = 0; i < position; i++) {
-                if (items[i].getName().equals(key)) {
-                    result[count] = items[i];
+                if (items.get(i).getName().equals(key)) {
+                    result[count] = items.get(i);
                 }
             }
             return Arrays.copyOf(result, count);
@@ -77,7 +77,7 @@ public class Tracker extends Item {
         public Item[] findAll() {
             Item[] result = new Item[this.position];
             for (int index = 0; index != this.position; index++) {
-                result[index] = this.items[index];
+                result[index] = this.items.get(index);
             }
             return result;
         }
