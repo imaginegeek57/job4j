@@ -5,7 +5,8 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 import java.util.*;
-
+import java.util.List;
+import java.util.ArrayList;
 public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
@@ -119,7 +120,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.findAll()) {
-                    System.out.println();
+                System.out.println();
             }
         }
         @Override
@@ -189,8 +190,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите имя заявки");
-            Item[] byName = tracker.findByName(name);
-            if (byName.length != 0) {
+            List<Item> byName = tracker.findByName(name);
+            if (byName.size() != 0) {
                 for (Item item : byName) {
                     System.out.println(item);
                 }
@@ -225,5 +226,4 @@ public class MenuTracker {
         }
     }
 }
-
 
