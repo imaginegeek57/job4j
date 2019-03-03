@@ -61,8 +61,8 @@ public class Tracker extends Item {
     }
     public List <Item> delete(String key) {
         List <Item> items = new ArrayList <>();
-        for (Item it : items) {
-            if (it.equals(key))
+        for (Item it : this.items) {
+            if (it.getName().equals(key))
                 items.remove(it);
             break;
         }
@@ -71,8 +71,8 @@ public class Tracker extends Item {
 
     public List <Item> findByName(String key) {
         List <Item> items = new ArrayList <>();
-        for (Item it : items) {
-            if (it.equals(key)) {
+        for (Item it : this.items) {
+            if (it.getId().equals(key)) {
                 break;
             }
         }
@@ -81,7 +81,7 @@ public class Tracker extends Item {
 
     public List <Item> findAll() {
         List <Item> items = new ArrayList <>();
-        for (Item it : items) {
+        for (Item it : this.items) {
 
         }
             return items;
