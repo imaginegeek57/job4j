@@ -11,7 +11,7 @@ public class Tracker extends Item {
     /**
      * Массив для хранение заявок.
      */
-    private final List <Item> items = new ArrayList <>(100);
+    private final List<Item> items = new ArrayList<>(100);
     private static final Random RN = new Random();
     /**
      * Указатель ячейки для новой заявки.
@@ -59,30 +59,29 @@ public class Tracker extends Item {
             }
         }
     }
-    public List <Item> delete(String key) {
-        List <Item> items = new ArrayList <>();
-        for (Item it : this.items) {
-            if (it.getName().equals(key))
-                items.remove(it);
-            break;
-        }
-        return items;
-    }
-
-    public List <Item> findByName(String key) {
-        List <Item> items = new ArrayList <>();
+    public List<Item> delete(String key) {
+        List<Item> items = new ArrayList<>();
         for (Item it : this.items) {
             if (it.getId().equals(key)) {
+                items.remove(it);
                 break;
             }
         }
         return items;
     }
-
-    public List <Item> findAll() {
-        List <Item> items = new ArrayList <>();
+    public List<Item> findByName(String key) {
+        List<Item> items = new ArrayList<>();
         for (Item it : this.items) {
-
+            if (it.getName().equals(key)) {
+                items.add(it);
+            }
+        }
+        return items;
+    }
+    public List<Item> findAll() {
+        List<Item> items = new ArrayList<>();
+        for (Item it : this.items) {
+            items.add(it);
         }
             return items;
     }
