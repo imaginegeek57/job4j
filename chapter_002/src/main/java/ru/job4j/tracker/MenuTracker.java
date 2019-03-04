@@ -4,10 +4,7 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 0.1
  */
-
 import java.util.*;
-import java.util.List;
-import java.util.ArrayList;
 public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
@@ -91,7 +88,7 @@ public class MenuTracker {
         }
         @Override
         public int key() {
-            return 2;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -103,30 +100,29 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return "Update Item.";
+            return String.format("%d. %s", key, name);
         }
     }
     private class ShowItems implements UserAction {
         private int key;
         private String name;
-
         public ShowItems(int key, String name) {
             this.key = key;
             this.name = name;
         }
         @Override
         public int key() {
-            return 1;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.findAll()) {
-                System.out.println();
+                System.out.println(item);
             }
         }
         @Override
         public String info() {
-            return "Show all Items.";
+            return String.format("%d. %s", key, name);
         }
     }
     private class DeleteItem implements UserAction {
@@ -138,7 +134,7 @@ public class MenuTracker {
         }
         @Override
         public int key() {
-            return 3;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -148,7 +144,7 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return "Delete Item.";
+            return String.format("%d. %s", key, id);
         }
     }
     private class FindItemById implements UserAction {
@@ -160,7 +156,7 @@ public class MenuTracker {
         }
         @Override
         public int key() {
-            return 4;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -174,7 +170,7 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return "Find Items.";
+            return String.format("%d. %s", key, id);
         }
     }
     private class FindItemsByName implements UserAction {
@@ -186,7 +182,7 @@ public class MenuTracker {
         }
         @Override
         public int key() {
-            return 5;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -202,7 +198,7 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return "Find items by name.";
+            return String.format("%d, %s", key, name);
         }
     }
     private class ExitProgram implements UserAction {
@@ -214,7 +210,7 @@ public class MenuTracker {
         }
         @Override
         public int key() {
-            return 6;
+            return key;
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -223,9 +219,8 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return "Exit Program.";
+            return String.format("%d. %s", key, name);
         }
     }
-
 }
 
