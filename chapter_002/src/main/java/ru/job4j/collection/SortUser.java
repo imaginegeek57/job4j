@@ -13,6 +13,7 @@ public class SortUser {
     public Set<User> sort(List<User> user) {
         Set<User> users = new TreeSet<>();
         for (User use : users){
+            users.add(use);
         }
         return users;
     }

@@ -1,12 +1,10 @@
 package ru.job4j.collection;
-
-import java.util.Comparator;
-
 /**
  * @author Vlad Mon (imaginegeek57@gmail.com)
  * @version $Id$
  * @since 0.1
  */
+import java.util.Comparator;
 public class User {
     private String name;
     private int age;
