@@ -6,20 +6,20 @@ package ru.job4j.collection;
  */
 import java.util.*;
 public class SortUser {
-    public Set <User> sort(List <User> user) {
+    public List<User> sort(List <User> user) {
         Set <User> users = new TreeSet <>();
-        return (Set <User>) user;
+        return user;
     }
-    public Set <User> sortName(List <User> user) {
+    public List<User> sortName(List <User> user) {
         user.sort(new Comparator <User>() {
             @Override
             public int compare(User o1, User o2) {
                 return o1.getName().length() - o2.getName().length();
             }                           //  еще вариант Integer.compare(o1.length(), o2.length())
         });
-        return (Set <User>) user;
+        return user;
     }
-    public Set <User> sortAll(List <User> user) {
+    public List<User> sortAll(List <User> user) {
         user.sort(new Comparator <User>() {
             @Override
             public int compare(User o1, User o2) {
@@ -27,7 +27,7 @@ public class SortUser {
                 return comp != 0 ? comp : Integer.compare(o1.getAge(), o2.getAge());
             }
         });
-        return (Set <User>) user;
+        return user;
     }
 }
 
