@@ -6,7 +6,6 @@ package ru.job4j.collection;
  */
 import java.util.*;
 public class SortUser {
-
     public Set <User> sort(List <User> user) {
         Set <User> users = new TreeSet <>();
         return (Set <User>) user;
