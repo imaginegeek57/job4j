@@ -11,11 +11,12 @@ public class ListCompare implements Comparator<String> {
     public int compare(String left, String right) {
         char[] l = left.toCharArray();
         char[] r = right.toCharArray();
-        char[] min = (l.equals(r)) ? l : r;
-            for (int i = 0; i < min.length; i++) {
+        final int min = Math.min(l.length, r.length);
+            for (int i = 0; i < min; i++) {
                 if(l[i] != r[i]) {
+                    return Character.compare(l[i], r[i]);
                 }
         }
-        return Character.compare(char left, char right);   // не знаю что вернуть...
+        return Integer.compare(left.length(), right.length());
     }
 }
