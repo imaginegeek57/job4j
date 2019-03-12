@@ -4,6 +4,7 @@ package ru.job4j.collection;
  * @version $Id$
  * @since 0.1
  */
+
 import java.util.*;
 import java.util.Comparator;
 public class ListCompare implements Comparator<String> {

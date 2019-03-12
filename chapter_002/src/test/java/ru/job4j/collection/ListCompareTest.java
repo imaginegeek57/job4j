@@ -4,6 +4,7 @@ package ru.job4j.collection;
  * @version $Id$
  * @since 0.1
  */
+
 import java.util.*;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
