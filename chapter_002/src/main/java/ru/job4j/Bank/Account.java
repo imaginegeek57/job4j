@@ -15,7 +15,6 @@ public class Account {
     public String getValue() {
         return value;
     }
-
     public int getRequisites() {
         return requisites;
     }

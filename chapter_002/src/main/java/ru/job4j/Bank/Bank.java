@@ -8,42 +8,39 @@ import java.util.*;
 public class Bank {
     public static void main(String[] args) {
     }
-    public Map<User,List<Account>> data = new HashMap <>();
-    List <User> list = new ArrayList <>();
+
+    public Map <User, List <Account>> data = new HashMap <>();
 
     // добавление пользователя.
     public void addUser(User user) {
-        list.add(user);
+        data.put(user, new ArrayList <>());
     }
+
     // удаление пользователя.
     public void deleteUser(User user) {
-        list.remove(user);
+        data.remove(user);
     }
+
     // добавить счёт пользователю.
     public void addAccountToUser(String passport, Account account) {
         getUserAccounts(passport).add(account);
-
     }
+
     // удалить один счёт пользователя.
     public void deleteAccountFromUser(String passport, Account account) {
         getUserAccounts(passport).remove(account);
 
     }
+
     // получить список счетов для пользователя.
-    public List<Account> getUserAccounts (String passport) {
+    public List <Account> getUserAccounts(String passport) {
         return getUserAccounts(passport);
     }
-    // не совсем понятно откуда берутся эти переменные....?
 
-    //если счёт не найден или не хватает денег на счёте srcAccount (с которого переводят) должен вернуть false.
-//   public boolean transferMoney (String srcPassport, String srcRequisite,
-//                                 String destPassport, String dstRequisite, double amount)
-//    - метод для перечисления денег с одного счёта на другой счёт:
+    public boolean transferMoney(User user1, Account account1,
+                            User user2, Account account2) {
+        return this.data.get(user1).contains(account1)
+                && this.data.get(user2).contains(account2);
 
-
-
-
-
-    // Посмотрите на методы Map.putIfAbsent и List.indexOf, как их можно применить в этом задании.
-
+    }
 }
