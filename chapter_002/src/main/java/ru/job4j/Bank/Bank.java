@@ -8,44 +8,40 @@ import java.util.*;
 public class Bank {
     public static void main(String[] args) {
     }
-
     public Map <User, List <Account>> data = new HashMap <>();
-
     // добавление пользователя.
     public void addUser(User user) {
-        List <Account> accounts = null;
-        for (User u : data.keySet()) {
-            if (data.get(user) == null) {
-                data.put(user, new ArrayList <>());
-            }
+        if (!data.containsKey(user)) {
+            data.put(user, new ArrayList <>());
         }
     }
-
     // удаление пользователя.
     public void deleteUser(User user) {
+        data.remove(user);
+    }
+    public List <Account> getUserAccounts(String passport) {
         List <Account> accounts = null;
         for (User u : data.keySet()) {
-            if (u.equals(user)) {
-                data.remove(user);
+            if (u.getPassport().equals(passport)) {
+                accounts = data.get(u);
+                break;
             }
         }
+        return accounts;
     }
     // добавить счёт пользователю.
     public void addAccountToUser(String passport, Account account) {
-        List <Account> accounts = null;
         for (User u : data.keySet()) {
-            if (u.getPassport().equals(account)) {
-                if (account == null) {
-                    data.put(u, new ArrayList <>());
-                }
+            if (!data.containsValue(passport)) {
+                data.put(u, new ArrayList <>());
             }
         }
+
     }
     // удалить один счёт пользователя.
     public void deleteAccountFromUser(String passport, Account account) {
-        List <Account> accounts = null;
         for (User u : data.keySet()) {
-           data.get(u).indexOf(account);
+           if (data.containsValue(passport));
             data.remove(account);
         }
     }
@@ -55,5 +51,4 @@ public class Bank {
                 && this.data.get(user2).contains(account2);
     }
 }
-
 
