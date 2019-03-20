@@ -18,5 +18,4 @@ public class Account {
     public int getRequisites() {
         return requisites;
     }
-    
 }

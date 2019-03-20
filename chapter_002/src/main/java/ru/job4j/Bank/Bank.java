@@ -19,6 +19,7 @@ public class Bank {
     public void deleteUser(User user) {
         data.remove(user);
     }
+    //получить список счетов для пользователя
     public List <Account> getUserAccounts(String passport) {
         List <Account> accounts = null;
         for (User u : data.keySet()) {
@@ -29,11 +30,15 @@ public class Bank {
         }
         return accounts;
     }
-    // добавить счёт пользователю.
+    //добавить счёт пользователю.
     public void addAccountToUser(String passport, Account account) {
         for (User u : data.keySet()) {
-            if (!data.containsValue(passport)) {
-                data.put(u, new ArrayList <>());
+            if (u.getPassport().equals(passport)) {
+                final List<Account> accounts = data.get(u);
+                if (!accounts.contains(account)) {
+                    accounts.add(account);
+                    break;
+                }
             }
         }
 
@@ -41,8 +46,13 @@ public class Bank {
     // удалить один счёт пользователя.
     public void deleteAccountFromUser(String passport, Account account) {
         for (User u : data.keySet()) {
-           if (data.containsValue(passport));
-            data.remove(account);
+            if (u.getPassport().equals(passport)) {
+                final List<Account> accounts = data.get(u);
+                if (!accounts.contains(account)) {
+                    accounts.remove(account);
+                    break;
+                }
+            }
         }
     }
     public boolean transferMoney(User user1, Account account1,

@@ -27,7 +27,6 @@ public class User {
         return Objects.equals(name, user.name) &&
                 Objects.equals(passport, user.passport);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(name, passport);
