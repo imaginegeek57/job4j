@@ -55,10 +55,13 @@ public class Bank {
             }
         }
     }
-    public boolean transferMoney(User user1, Account account1,
-                                 User user2, Account account2) {
-        return this.data.get(user1).contains(account1)
-                && this.data.get(user2).contains(account2);
+    public boolean transferMoney (String srcPassport, String srcRequisite,
+                                  String destPassport, String dstRequisite, double amount) {
+        return this.data.get(srcPassport).contains(destPassport)
+                && this.data.get(srcRequisite).contains(dstRequisite)
+                && getUserAccounts(dstRequisite).transfer(
+                getUserAccounts(dstRequisite), amount);
+
     }
 }
 
