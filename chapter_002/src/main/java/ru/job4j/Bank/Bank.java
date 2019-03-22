@@ -41,7 +41,6 @@ public class Bank {
                 }
             }
         }
-
     }
     // удалить один счёт пользователя.
     public void deleteAccountFromUser(String passport, Account account) {
@@ -55,13 +54,24 @@ public class Bank {
             }
         }
     }
+    //поиска аккаунта по реквизитам и паспорту
+    public void getActualAccount(String passport, Account account) {
+        for (User u : data.keySet()) {
+            if (u.getPassport().equals(passport)) {
+                List<Account> accounts = data.get(u);
+                if (accounts.contains(account)) {
+                    accounts = data.get(u);
+                    break;
+                }
+            }
+        }
+    }
     public boolean transferMoney (String srcPassport, String srcRequisite,
                                   String destPassport, String dstRequisite, double amount) {
         return this.data.get(srcPassport).contains(destPassport)
                 && this.data.get(srcRequisite).contains(dstRequisite)
-                && getUserAccounts(dstRequisite).transfer(
-                getUserAccounts(dstRequisite), amount);
-
+                && getActualAccount(srcPassport, srcRequisite).transfer(
+                getActualAccount(destPassport, dstRequisite);, amount);
     }
 }
 

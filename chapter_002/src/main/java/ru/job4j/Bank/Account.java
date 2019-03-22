@@ -6,16 +6,28 @@ package ru.job4j.Bank;
  */
 import java.util.*;
 public class Account {
-    private String value;
+    private double value;
     private int requisites;
-    public Account (String value, int requisites) {
+    public Account (double value, int requisites) {
         this.value = value;
         this.requisites = requisites;
     }
-    public String getValue() {
+    public double getValue() {
         return value;
     }
     public int getRequisites() {
         return requisites;
     }
+
+    boolean transfer(Account destination, double amount) {
+        boolean success = false;
+        if (amount > 0 && amount < this.value && destination != null) {
+            success = true;
+            this.value -= amount;
+            destination.value += amount;
+        }
+        return success;
+    }
 }
+
+
