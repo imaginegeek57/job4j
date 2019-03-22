@@ -7,15 +7,16 @@ package ru.job4j.Bank;
 import java.util.*;
 public class Account {
     private double value;
-    private int requisites;
-    public Account (double value, int requisites) {
+    private String requisites;
+
+    public Account(double value, String requisites) {
         this.value = value;
         this.requisites = requisites;
     }
     public double getValue() {
         return value;
     }
-    public int getRequisites() {
+    public String getRequisites() {
         return requisites;
     }
 
@@ -28,6 +29,19 @@ public class Account {
         }
         return success;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(value, account.value) &&
+                Objects.equals(value, account.requisites);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, requisites);
+    }
 }
+
+
 
 
