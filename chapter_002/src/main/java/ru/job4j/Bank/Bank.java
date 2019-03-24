@@ -53,47 +53,40 @@ public class Bank {
         for (User u : data.keySet()) {
             if (u.getPassport().equals(passport)) {
                 final List <Account> accounts = data.get(u);
-                if (!accounts.contains(account)) {
+                if (accounts.contains(account)) {
                     accounts.remove(account);
                     break;
                 }
             }
         }
     }
-
     //поиска аккаунта по реквизитам и паспорту
     public Account getActualAccount(String passport, String requisites) {
+        Account acc = null;
         for (User u : data.keySet()) {
             if (u.getPassport().equals(passport)) {
                 List <Account> accounts = data.get(u);
                 for (Account account : accounts) {
                     if (account.getRequisites().contains(requisites)) {
+                        acc = account;
                         break;
                     }
                 }
             }
         }
-        return account;
+        return acc;
+    }
+    //перевод денег
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String dstRequisite, double amount) {
+        for (User u : data.keySet()) {
+            if (u.getPassport().equals(srcPassport) && u.getPassport().equals(destPassport)) {
+                List <Account> accounts = data.get(u);
+
+            }
+        }
+        return  getActualAccount(srcPassport, srcRequisite).transfer(
+                getActualAccount(destPassport, dstRequisite), amount);
     }
 }
 
-
-
-//    public boolean transferMoney (String srcPassport, String srcRequisite,
-//                                  String destPassport, String dstRequisite, double amount) {
-//        for (User u : data.keySet()) {
-//            List <Account> accounts = null;
-//           if (u.getPassport().equals(srcPassport) && u.getPassport().equals(destPassport)) {
-//               if (u.equals(dstRequisite) && u.equals(srcRequisite)) {
-//                   accounts = data.get(u);
-//                   getActualAccount(srcPassport,).transfer( //
-//               }
-//           }
-//        }
-//        return ;
-
-
-//        return this.data.get(srcPassport).contains(destPassport)
-//                && this.data.get(srcRequisite).contains(dstRequisite)
-//                && getActualAccount(srcPassport, srcRequisite).transfer(
-//                getActualAccount(destPassport, dstRequisite);, amount);
