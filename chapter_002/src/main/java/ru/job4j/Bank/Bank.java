@@ -73,14 +73,13 @@ public class Bank {
     //перевод денег
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String dstRequisite, double amount) {
-        for (User u : data.keySet()) {
-            if (data.get(u).contains(srcPassport) && data.get(u).contains(destPassport)) {
-                final List <Account> accounts = data.get(u);
-                getActualAccount(srcPassport, srcRequisite).transfer(
-                        getActualAccount(destPassport, dstRequisite), amount);
-                break;
-            }
+        getActualAccount(srcPassport, srcRequisite).transfer
+                (getActualAccount(destPassport, dstRequisite), amount);
+        if (getActualAccount(srcPassport, srcRequisite)== null &&
+                (getActualAccount(destPassport, dstRequisite) == null)) {
+
         }
-        return  true;
+
+        return true;
     }
 }
