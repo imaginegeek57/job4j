@@ -1,4 +1,4 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 /**
  * @author Vlad Mon (imaginegeek57@gmail.com)
  * @version $Id$

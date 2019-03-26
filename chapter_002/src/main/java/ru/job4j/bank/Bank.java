@@ -1,4 +1,4 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 /**
  * @author Vlad Mon (imaginegeek57@gmail.com)
  * @version $Id$
@@ -73,13 +73,12 @@ public class Bank {
     //перевод денег
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String dstRequisite, double amount) {
-        getActualAccount(srcPassport, srcRequisite).transfer
-                (getActualAccount(destPassport, dstRequisite), amount);
-        if (getActualAccount(srcPassport, srcRequisite)== null &&
-                (getActualAccount(destPassport, dstRequisite) == null)) {
-
+        boolean res = false;
+        final Account account =  getActualAccount(srcPassport, srcRequisite);
+        final Account account1 = getActualAccount(srcPassport, srcRequisite);
+        if (account != null && account1 != null) {
+               res = account.transfer(account1, amount);
         }
-
-        return true;
+        return res;
     }
 }
