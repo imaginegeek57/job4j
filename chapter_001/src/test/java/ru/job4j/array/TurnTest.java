@@ -8,10 +8,10 @@ public class TurnTest {
     @Test
     public void whenTurnArrayWithEvenAmountOfElementsThenTurnedArray() {
         Turn turner = new Turn();
-        int[] input = new int[] {4, 1, 6, 2};
+        int[] input = new int[]{4, 1, 6, 2};
         int[] result = turner.back(input);
-        int[] expect = new int[] {2, 6, 1, 4};
+        int[] expect = new int[]{2, 6, 1, 4};
         assertThat(result, is(expect));
     }
-
 }
+
