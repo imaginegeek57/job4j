@@ -12,13 +12,13 @@ public class Calculator {
         double calc(int left, int right);
     }
     public void multiple(int start, int finish, int value,
-                         BiFunction <Integer, Integer, Double> op,
-                         Consumer <Double> media) {
+                         BiFunction <Integer, Integer, Double> op, // op -это конструктор интерфейса Operation?
+                         Consumer <Double> media) { // для чего мы это используем?
         for (int index = start; index != finish; index++) {
-            media.accept(op.apply(value, index));
+            media.accept(op.apply(value, index)); // media.accept(op.apply - что обозначают эти слова не совсем понятно
         }
-    }
 
+    }
     public static void main(String[] args) {
         Calculator calc = new Calculator();
         calc.multiple(
