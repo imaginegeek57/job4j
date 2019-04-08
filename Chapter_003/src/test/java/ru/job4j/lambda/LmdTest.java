@@ -12,24 +12,28 @@ import static org.junit.Assert.assertThat;
 public class LmdTest {
     @Test
     public void name() {
-        final List<Double> diapason = diapason(1, 5, index -> Math.pow(index, 3)); // после знака -> показывает ошибку
+        Lmd lmd= new Lmd();
+        final List<Double> diapason = lmd.diapason(1, 5, index -> Math.pow(index, 3)); // после знака -> показывает ошибку
         diapason.forEach(System.out :: println);
     }
 
     @Test
     public void whenLinearFunctionThenLinearResults() {
+        Lmd function = new Lmd();
         List<Double> result = function.diapason(5, 8, x -> 2 * x + 1); // аналогично  после знака -> показывает ошибку
         List<Double> expected = Arrays.asList(11D, 13D, 15D); //
         assertThat(result, is(expected));
     }
     @Test
     public void addition() {
-        final List<Double> diapason = diapason(3, 6, index -> 4 + index);
+        Lmd func = new Lmd();
+        final List<Double> diapason = func.diapason(3, 6, index -> 4 + index);
         diapason.forEach(System.out :: println);
     }
     @Test
     public void subtraction() {
-        final List<Double> diapason = diapason(5, 9, index -> index - 6 );
+        Lmd lmd = new Lmd();
+        final List<Double> diapason = lmd.diapason(5, 9, index -> index - 6 );
         diapason.forEach(System.out :: println);
     }
 }
