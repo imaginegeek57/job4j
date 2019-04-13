@@ -5,6 +5,8 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 import java.util.*;
+import java.util.function.Consumer;
+
 public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
@@ -18,15 +20,18 @@ public class MenuTracker {
      * @param хранит ссылку на массив типа UserAction.
      */
     private ArrayList<UserAction> actions = new ArrayList<>();
+    private final Consumer<String> output;
     /**
      * Конструктор.
      *1
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
+     * @param output
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer <String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
     /**
      * Метод для получения массива меню.
