@@ -67,7 +67,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                output.accept(action.info());
             }
         }
     }
@@ -143,7 +143,7 @@ public class MenuTracker {
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("--------Удаление заявки--------");
+            output.accept("--------Удаление заявки--------");
             String id = input.ask("Введите id заявки :");
             tracker.delete(id);
         }
@@ -170,7 +170,7 @@ public class MenuTracker {
             if (byId != null) {
                 System.out.println(byId);
             } else {
-                System.out.println("Item not found");
+                output.accept("Item not found");
             }
         }
         @Override
@@ -198,7 +198,7 @@ public class MenuTracker {
                     System.out.println(item);
                 }
             } else {
-                System.out.println("Заявок с данным именем не найдено");
+                output.accept("Заявок с данным именем не найдено");
             }
         }
         @Override
@@ -219,7 +219,7 @@ public class MenuTracker {
         }
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("Выбран пункт Exit Program, досвидания!");
+            output.accept("Выбран пункт Exit Program, досвидания!");
             select(key);
         }
         @Override
