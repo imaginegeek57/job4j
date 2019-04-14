@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Vlad Mon (imaginegeek57@gmail.com)
  * @version $Id$
@@ -13,36 +17,77 @@ public class Item {
     private long create;
     private String delete;
     private String[] comments;
+
     public Item() {
     }
+
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
     }
+
     public Item(String name, String description, String id) {
         this.name = name;
         this.description = description;
         this.id = id;
     }
-        public String getName() {
-            return this.name;
+
+    public String getName() {
+        return this.name;
     }
+
     public String getDescription() {
         return this.description;
     }
+
     public long getCreate() {
         return this.create;
     }
+
     public String[] getComments() {
         return this.comments;
     }
+
     public String getId() {
         return this.id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public String getDelete() {
         return this.delete;
     }
+
+
+    @Override
+    public String toString() {
+        return "Item{"
+                +
+                "id='"
+                + id
+                + '\''
+                +
+                ", name='"
+                + name
+                + '\''
+                +
+                ", description='"
+                + description
+                + '\''
+                +
+                ", create="
+                + create
+                +
+                ", delete='"
+                + delete + '\''
+                +
+                ", comments="
+                + Arrays.toString(comments)
+                +
+                '}';
+    }
+
 }
+

@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public class StartUI {
-        private int[] ranges = new int[]{1, 2, 3, 4, 5, 6};
+        private int[] ranges = new int[]{0, 1, 2, 3, 4, 5, 6};
         /**
          * Получение данных от пользователя.
          */
@@ -56,6 +56,6 @@ public class StartUI {
                             new ConsoleInput()
                     ),
                     new Tracker(),
-                    output).init();
+                     System.out::println).init();
         }
     }

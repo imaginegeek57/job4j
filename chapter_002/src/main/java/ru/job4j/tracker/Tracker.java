@@ -8,7 +8,7 @@ package ru.job4j.tracker;
 import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
-public class Tracker extends Item {
+public class Tracker {
     /**
      * Массив для хранение заявок.
      */
@@ -26,7 +26,7 @@ public class Tracker extends Item {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items.set(this.position++, item);
+        this.items.add(item);
         return item;
     }
     // Метод добавляет заявку по id
@@ -52,23 +52,24 @@ public class Tracker extends Item {
 
     // Метод должен заменить ячейку в массиве this.items
     public void replace(String id, Item item) {
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(id)) {
-                items.get(i).equals(item);
+                items.set(i, item);
                 item.setId(id);
                 break;
             }
         }
     }
-    public List<Item> delete(String key) {
-        List<Item> items = new ArrayList<>();
+    public boolean delete(String key) {
+        boolean res = false;
         for (Item it : this.items) {
             if (it.getId().equals(key)) {
                 items.remove(it);
+                res = true;
                 break;
             }
         }
-        return items;
+        return res;
     }
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
