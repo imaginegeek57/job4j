@@ -9,11 +9,11 @@ import java.util.function.Consumer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 public class SrtUITest {
-
+    String[] menu = {"0", "1", "2", "3", "4", "5", "6"};// я понимаю что это бред
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     private final Consumer <String> output = new Consumer<String>() {
         private final PrintStream stdout = new PrintStream(out);
-        @Before
+
 
         @Override
         public void accept(String s) {
