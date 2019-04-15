@@ -10,19 +10,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 public class SrtUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    final String  menu =  "0. Add new Item."
+    final String  menu =  "0. Add new item"
             + System.lineSeparator()
-            + "1. Show all Item"
+            + "1. Show all items"
             + System.lineSeparator()
-            + "2. Update Item."
+            + "2. Edit item"
             + System.lineSeparator()
-            + "3. Delete Item."
+            + "3. Delete item"
             + System.lineSeparator()
-            + "4. Find Item by ID"
+            + "4. Find item by ID"
             + System.lineSeparator()
-            + "5. Find Item by name"
+            + "5, Find item by name"
             + System.lineSeparator()
-            + "6. Exit"
+            + "6. Exit program"
             + System.lineSeparator();
     private final Consumer <String> output = new Consumer<String>() {
         private final PrintStream stdout = new PrintStream(out);
@@ -42,7 +42,9 @@ public class SrtUITest {
         Tracker tracker = new Tracker();
         new StartUI(new StubInput(new String[] {"0","name", "desc", "n", "1", "y"}), tracker, output).init();
         final Item item = tracker.findByName("name").get(0);// вот строка ожидания, как ни пытался ее добавить не получается
-        System.out.println(item);
-        assertThat(this.output.toString(), is(item));
+        StringBuilder sb = new StringBuilder(menu)
+                .append(menu)
+                .append(item);
+        assertThat(this.output.toString(), is(sb));
     }
 }
