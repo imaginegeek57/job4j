@@ -6,7 +6,6 @@ package ru.job4j.tracker;
  */
 import java.util.*;
 import java.util.function.Consumer;
-
 public class MenuTracker {
     /**
      * @param хранит ссылку на объект .

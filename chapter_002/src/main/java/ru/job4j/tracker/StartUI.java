@@ -18,7 +18,6 @@ public class StartUI {
          */
         private final Tracker tracker;
         private final Consumer<String>output;
-
         /**
          * Конструтор инициализирующий поля.
          *  @param input   ввод данных.
