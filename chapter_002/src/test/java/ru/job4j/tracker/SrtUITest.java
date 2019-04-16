@@ -38,14 +38,33 @@ public class SrtUITest {
         }
     };
     @Test
-    public void whenFindById() {
+    public void whenFindByName() {
         Tracker tracker = new Tracker();
         new StartUI(new StubInput(new String[] {"0","name", "desc", "n", "1", "y"}), tracker, output).init();
-        final Item item = tracker.findByName("name").get(0);// вот строка ожидания, как ни пытался ее добавить не получается
+        final Item item = tracker.findByName("name").get(0);
         StringBuilder sb = new StringBuilder(menu)
                 .append(menu)
                 .append(item)
                 .append(System.lineSeparator());
+        assertThat(this.output.toString(), is(sb.toString()));
+    }
+    @Test
+    public void whenFindBySoth() {
+        Tracker tracker = new Tracker();
+        new StartUI(new StubInput(new String[] {"0","Tom", "meow", "n", "1", "y"}), tracker, output).init();
+        final Item item = tracker.findByName("Tom").get(0);
+        StringBuilder sb = new StringBuilder(menu)
+                .append(menu)
+                .append(item)
+                .append(System.lineSeparator());
+        assertThat(this.output.toString(), is(sb.toString()));
+    }
+    @Test
+    public void whenFindNothing() {
+        Tracker tracker = new Tracker();
+        new StartUI(new StubInput(new String[] {"0","HI", "1", "y"}), tracker, output).init();
+        final Item item = tracker.findByName("HI").get(0);
+        StringBuilder sb = new StringBuilder(menu);
         assertThat(this.output.toString(), is(sb.toString()));
     }
 }
