@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class School {
     List<Student> collect(List <Student> students, Predicate<Student>predict){
         List<Student> classes = new LinkedList <>();
-        List<Student> splitUp = classes.stream().filter(predict)
+        List<Student> splitUp = students.stream().filter(predict)
         .collect(Collectors.toList());
         return splitUp;
     }
