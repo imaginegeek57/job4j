@@ -19,8 +19,23 @@ public class SchoolTest {
     @Test
     public void whenSplitUp() {
         School school = new School();
-        List<Student> spl = Arrays.asList(new Student(100-70), new Student(70-50), new Student(50-0));
-        school.collect(spl.stream().filter(student -> ()).collect(Collectors.toList())); // тут не совсем понимаю что написать
+        List<Student> spl = Arrays.asList(new Student(100-70));
+        school.collect(spl.stream().filter(student -> (spl.contains(Student))));// бред?
+        assertThat(spl.stream(), is(Arrays.asList(spl)));
+    }
+    @Test
+    public void whenSplitUp() {
+        School school = new School();
+        List <Student> spl = Arrays.asList(new Student(70 - 50));
+        school.collect(spl.stream().filter(student -> ()).collect(Collectors.toList()));
+        assertThat(spl.stream(), is(Arrays.asList(spl)));
+    }
+    @Test
+    public void whenSplitUp() {
+        School school = new School();
+        List<Student> spl = Arrays.asList(new Student(50-0));
+        school.collect(spl.stream().filter(student -> ()).collect(Collectors.toList()));
+        assertThat(spl.stream(), is(Arrays.asList(spl)));
     }
 
 }
