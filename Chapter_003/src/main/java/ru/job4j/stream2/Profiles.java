@@ -6,12 +6,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Profiles {
-
     List<Address>collect(List<Profile>profiles) {
-        List <Profile> str = new ArrayList <>();
-        profiles.stream().map(profile -> profile.getAddress())
+        return profiles.stream().map(profile -> profile.getAddress())
                 .collect(Collectors.toList());
 
-       return str;
     }
 }
