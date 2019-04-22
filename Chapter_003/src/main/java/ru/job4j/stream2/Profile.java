@@ -1,6 +1,5 @@
 package ru.job4j.stream2;
 
-
 public class Profile {
     private Address address;
 

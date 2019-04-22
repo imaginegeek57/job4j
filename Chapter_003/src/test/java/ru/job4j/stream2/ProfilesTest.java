@@ -11,9 +11,10 @@ public class ProfilesTest {
     @Test
     public void whenWeHaveTest() {
         Profiles profiles = new Profiles();
-        List<Profile> str = Arrays.asList(new Profile(new Address("Moscow", "Lenin", 25, 2)));
-        List<Profile> cool = profiles.collect(List<Profile>profiles);
-
-        assertThat(str, is(cool));
+        final Address address = new Address("Moscow", "Lenin", 25, 2);
+        final Profile profile = new Profile(address);
+        List<Profile> str = Arrays.asList(profile);
+        List<Address> cool = profiles.collect(str);
+        assertThat(cool, is(Arrays.asList(address)));
     }
 }

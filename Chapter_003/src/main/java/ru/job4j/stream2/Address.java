@@ -1,6 +1,5 @@
 package ru.job4j.stream2;
 
-
 public class Address {
     private String city;
     private String street;
