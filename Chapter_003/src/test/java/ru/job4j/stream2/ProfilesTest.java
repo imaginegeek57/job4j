@@ -26,6 +26,6 @@ public class ProfilesTest {
         final Profile profile1 = new Profile(address1);
         List <Profile> str = Arrays.asList(profile, profile1);
         List <Address> cool = profiles.collect(str);
-        assertThat(cool, is(Arrays.asList(address, address1)));
+        assertThat(cool, is(Arrays.asList(address1, address)));
     }
 }

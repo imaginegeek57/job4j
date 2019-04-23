@@ -13,6 +13,7 @@ public class Address implements Comparable<Address>{
         this.street = street;
         this.home = home;
     }
+
     public String getCity() {
         return city;
     }
