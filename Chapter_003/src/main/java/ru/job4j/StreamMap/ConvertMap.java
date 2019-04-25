@@ -1,18 +1,17 @@
 package ru.job4j.StreamMap;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConvertMap {
-    List<Student>convert(List<Student>con) {
+    Map <String, Student> convert(List<Student>con) {
         return con.stream().distinct().collect(
                 Collectors.toMap(
-                        Student -> Student.getSurname(), // это ключ карты по фамилии студента
-                        Student -> Student// здесь должно быть значение Map но что-то оно не выходит
-
-                );
-
-        )
+                        Student -> Student.getSurname(),
+                        Student -> Student
+                ));
     }
-
 }
