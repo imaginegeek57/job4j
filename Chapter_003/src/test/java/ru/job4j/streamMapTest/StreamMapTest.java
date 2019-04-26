@@ -6,10 +6,12 @@ package ru.job4j.streamMapTest;
  */
 import org.junit.Test;
 
-import ru.job4j.StreamMap.ConvertMap;
-import ru.job4j.StreamMap.Student;
+import ru.job4j.streamMap.ConvertMap;
+import ru.job4j.streamMap.Student;
+import static org.hamcrest.Matchers.is;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StreamMapTest {
@@ -19,15 +21,15 @@ public class StreamMapTest {
         final Student student = new Student(50, "Pupkin", "Anchor");
         final Student student1 = new Student(60, "Pukin", "Bottom");
         final Student student2 = new Student(70,"Puck", "Ship");
-        //List<Student> list = new Arrays.asList(student, student1, student2);  почему так не дает добавить в list?
-        List<Student> list = new ArrayList <>();
-        list.add(student);
-        list.add(student1);
-        list.add(student2);
-        Map<String, Student> go = new HashMap <>();
-        convertMap.
-
+        List<Student> list = Arrays.asList(student, student1, student2);
+        convertMap.convert(list);
+        Map<String, Student> go = list.stream().distinct().collect(
+                Collectors.toMap(
+                        Student -> Student.getSurname(),
+                        Student -> Student
+                )
+        );
+        assertThat(list, is(go));
 
     }
-
 }
