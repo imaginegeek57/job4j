@@ -40,4 +40,14 @@ public class Student {
     public int hashCode() {
         return Objects.hash(surname);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Student{");
+        sb.append("surname='").append(surname).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", score=").append(score);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -22,14 +22,11 @@ public class StreamMapTest {
         final Student student1 = new Student(60, "Pukin", "Bottom");
         final Student student2 = new Student(70,"Puck", "Ship");
         List<Student> list = Arrays.asList(student, student1, student2);
-        convertMap.convert(list);
-        Map<String, Student> go = list.stream().distinct().collect(
-                Collectors.toMap(
-                        Student -> Student.getSurname(),
-                        Student -> Student
-                )
-        );
-        assertThat(list, is(go));
-
+        final Map<String,Student> convert = convertMap.convert(list);
+        Map<String, Student> ex = new HashMap <>();
+        ex.put(student.getSurname(), student);
+        ex.put(student1.getSurname(), student1);
+        ex.put(student2.getSurname(), student2);
+        assertThat(convert, is(ex));
     }
 }
