@@ -11,7 +11,6 @@ public class IteratorTask1 implements Iterator {
         this.numbers = numbers;
 
     }
-
     @Override
     public boolean hasNext() {
         for (int i = index; i < numbers.length; i++){
