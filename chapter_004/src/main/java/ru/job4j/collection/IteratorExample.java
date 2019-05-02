@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class IteratorExample implements Iterator {
    int[][] value = {
             {1, 2},
@@ -8,17 +10,26 @@ public class IteratorExample implements Iterator {
     private int i,j;
     IteratorExample(int[][] value) {
         this.value = value;
+        this.i = i;
+        this.j = j;
+
     }
 
+    @Override
     public boolean hasNext() {
-        return value.length > value[i][j];
+        return i < value.length && j < value[i].length;
     }
 
+    @Override
     public Object next() {
-        int gh = value[i][j];
-        while (i < value.length && j >= value[i].length) {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        int res = value[i][j++];
+        if (j == value[i].length) {
+            j = 0;
             i++;
         }
-        return gh;
+        return res;
     }
 }
