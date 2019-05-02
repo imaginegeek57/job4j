@@ -16,7 +16,6 @@ public class IteratorTask1Test {
     public void setUp(){
         it = new IteratorTask1(new int[]{1, 2, 3, 4, 5, 6, 7});
     }
-
     @Test(expected = NoSuchElementException.class)
     public void shouldReturnEvenNumbersSequentially () {
         assertThat(it.hasNext(), is(true));

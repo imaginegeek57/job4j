@@ -14,8 +14,13 @@ public class IteratorTask1 implements Iterator {
 
     @Override
     public boolean hasNext() {
-
-        return index % 2 + 1 < numbers.length;
+        for (int i = index; i < numbers.length; i++){
+            if (numbers[i] % 2 == 0) {
+                index = i;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -23,9 +28,6 @@ public class IteratorTask1 implements Iterator {
        if (!hasNext()) {
            throw new NoSuchElementException();
        }
-       int result = numbers[index++];
-       if (result % 2 == 0) {
-       }
-        return result;
+        return numbers[index++];
     }
 }
