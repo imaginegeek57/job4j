@@ -21,7 +21,6 @@ public class IteratorTask1 implements Iterator {
         }
         return false;
     }
-
     @Override
     public Object next() {
        if (!hasNext()) {
