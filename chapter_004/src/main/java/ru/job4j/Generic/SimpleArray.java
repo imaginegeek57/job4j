@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleArray<T> implements Iterator<T> {
+public class SimpleArray<T> implements Iterable<T> {
 
     Object[] objects;
 
@@ -18,8 +18,8 @@ public class SimpleArray<T> implements Iterator<T> {
         this.objects[index++] = model;
     }
     public T set(int index, T model) {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
+        if (index > -1 && index < this.index) {
+            throw new IndexOutOfBoundsException();
         }
         return (T) (this.objects[index] = model);
     }
@@ -27,13 +27,12 @@ public class SimpleArray<T> implements Iterator<T> {
     public T get(int position) {
         return (T) this.objects[position];
     }
-    @Override
     public boolean hasNext() {
         if (objects == null || index < 0 || index >= objects.length ) {
         }
         return index < this.objects.length;
     }
-    @Override
+
     public T next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -41,7 +40,8 @@ public class SimpleArray<T> implements Iterator<T> {
         return (T) this.objects[index++];
     }
     public T remove(int index) {
-        if (objects == null || index < 0 || index >= objects.length ) {
+        if (index > -1 && index < this.index) {
+            throw new IndexOutOfBoundsException();
         }
         Objects[]result = new Objects[objects.length - 1];
         System.arraycopy(objects, 0 ,result, 0, index);
@@ -49,5 +49,30 @@ public class SimpleArray<T> implements Iterator<T> {
             System.arraycopy(objects, index + 1, result, index, objects.length - index - 1);
         }
         return (T)result;
+    }
+    @Override
+    public Iterator <T> iterator() {
+        return new SimpleArrayIterator();
+    }
+}
+class SimpleArrayIterator implements Iterator {
+    private  int start;
+    private final int end;
+
+    SimpleArrayIterator(int start, int end) {
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return this.start < end;
+    }
+    @Override
+    public Integer next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return start++;
     }
 }
