@@ -14,9 +14,9 @@ public class SimpleArrayTest {
         simple.add("anyone");
         simple.add("else");
         simple.add("123");
-        simple.remove(3);
+        simple.remove(2);
         String result = simple.get(2);
-        assertThat(result, is("anyone"));
+        assertThat(result, is("else"));
     }
 
     @Test

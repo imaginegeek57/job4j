@@ -19,7 +19,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public boolean set(int index, T model) {
-        if (index > -1 && index < this.index) {
+        if (index > -1 && index > this.index) {
             throw new IndexOutOfBoundsException();
         }
         this.objects[index] = model;
@@ -31,7 +31,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T remove(int index) {
-        if (index > -1 && index < this.index) {
+        if (index > -1 && index > this.index) {
             throw new IndexOutOfBoundsException();
         }
         final T res = (T) objects[index];
