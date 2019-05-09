@@ -1,5 +1,6 @@
 package ru.job4j.generic;
 
+
 public abstract class Base {
 
     private final String id;
