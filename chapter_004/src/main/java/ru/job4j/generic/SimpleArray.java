@@ -7,7 +7,7 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] objects;
-
+    public int size = objects.length;
     private int index = 0;
 
     public SimpleArray(int size) {

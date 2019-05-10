@@ -1,13 +1,21 @@
 package ru.job4j.generic;
+/**
+ * @author Vlad Mon (imaginegeek57@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 
-public class RoleStore<T> implements Store<Role> {
+import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+public class RoleStore implements Store<Role> {
 
     private SimpleArray<Role> arrays;
 
     private int index = 0;
 
     public RoleStore(int size) {
-        this.arrays = new SimpleArray(size);
+        this.arrays = new SimpleArray (size);
     }
 
     @Override
@@ -17,15 +25,17 @@ public class RoleStore<T> implements Store<Role> {
 
     @Override
     public boolean replace(String id, Role model) {
-        for (Role i : this.arrays) {
-            if (i.getId().equals(id)) {
-                this.arrays.set(index, model);
-                break;
+        boolean res = false;
+        for (int i = 0; i < this.arrays.size; i++) {
+            Role Item = this.arrays.get(i);
+                if (Item.getId().equals(id)) {
+                    this.arrays.set(i, model);
+                    res = true;
+                    break;
+                }
             }
+            return res;
         }
-        return false;
-    }
-
     @Override
     public boolean delete(String id) {
         boolean res = false;
