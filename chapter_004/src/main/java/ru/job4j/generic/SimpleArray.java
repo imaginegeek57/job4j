@@ -18,7 +18,6 @@ public class SimpleArray<T> implements Iterable<T> {
         return this.index;
 
     }
-
     public void add(T model) {
         this.objects[index++] = model;
     }

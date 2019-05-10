@@ -8,55 +8,31 @@ package ru.job4j.generic;
 import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
-public class RoleStore implements Store<Role> {
+public class RoleStore extends AbstractStore<Role> {
 
     private SimpleArray<Role> arrays;
 
-    public RoleStore(int size) {
-        this.arrays = new SimpleArray (size);
+    public RoleStore(SimpleArray <Role> arrays) {
+        this.arrays = arrays;
     }
 
     @Override
     public void add(Role model) {
-        this.arrays.add(model);
+        super.add(model);
     }
 
     @Override
     public boolean replace(String id, Role model) {
-        boolean res = false;
-        for (int i = 0; i < this.arrays.size(); i++) {
-            Role item = this.arrays.get(i);
-                if (item.getId().equals(id)) {
-                    this.arrays.set(i, model);
-                    res = true;
-                    break;
-                }
-            }
-        return res;
+        return super.replace(id, model);
     }
+
     @Override
     public boolean delete(String id) {
-        boolean res = false;
-        for (int i = 0; i < this.arrays.size(); i++) {
-            Role item = this.arrays.get(i);
-            if (item.getId().equals(id)) {
-                arrays.remove(i);
-                res = true;
-                break;
-            }
-        }
-        return res;
+        return super.delete(id);
     }
 
     @Override
     public Role findById(String id) {
-        Role res = null;
-        for (int i = 0; i < this.arrays.size(); i++) {
-            Role item = this.arrays.get(i);
-            if (item.getId().equals(id)) {
-                res = this.arrays.get(i);
-            }
-        }
-        return res;
+        return super.findById(id);
     }
 }
