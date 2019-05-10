@@ -4,7 +4,6 @@ package ru.job4j.generic;
 public class UserStore implements Store<User> {
 
    private SimpleArray<User> array;
-   private int index = 0;
 
     public UserStore(int size) {
         this.array = new SimpleArray(size);
@@ -16,9 +15,9 @@ public class UserStore implements Store<User> {
     @Override
     public boolean replace(String id, User model) {
         boolean res = false;
-        for (int i = 0; i < this.array.size; i++) {
-            User Item = this.array.get(i);
-            if (Item.getId().equals(id)) {
+        for (int i = 0; i < this.array.size(); i++) {
+            User item = this.array.get(i);
+            if (item.getId().equals(id)) {
                 this.array.set(i, model);
                 res = true;
                 break;
@@ -29,9 +28,10 @@ public class UserStore implements Store<User> {
     @Override
     public boolean delete(String id) {
         boolean res = false;
-        for (User  i: this.array) {
-            if (i.getId().equals(id)) {
-                array.remove(index);
+        for (int i = 0; i < this.array.size(); i++) {
+            User item = this.array.get(i);
+            if (item.getId().equals(id)) {
+                array.remove(i);
                 res = true;
                 break;
             }
@@ -42,9 +42,10 @@ public class UserStore implements Store<User> {
     @Override
     public User findById(String id) {
         User res = null;
-        for (User i : this.array) {
-            if (i.getId().equals(id)) {
-                res = this.array.get(index);
+        for (int i = 0; i < this.array.size(); i++) {
+            User item = this.array.get(i);
+            if (item.getId().equals(id)) {
+                res = this.array.get(i);
             }
         }
         return res;

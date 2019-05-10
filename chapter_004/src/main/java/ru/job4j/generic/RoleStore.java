@@ -12,8 +12,6 @@ public class RoleStore implements Store<Role> {
 
     private SimpleArray<Role> arrays;
 
-    private int index = 0;
-
     public RoleStore(int size) {
         this.arrays = new SimpleArray (size);
     }
@@ -26,22 +24,23 @@ public class RoleStore implements Store<Role> {
     @Override
     public boolean replace(String id, Role model) {
         boolean res = false;
-        for (int i = 0; i < this.arrays.size; i++) {
-            Role Item = this.arrays.get(i);
-                if (Item.getId().equals(id)) {
+        for (int i = 0; i < this.arrays.size(); i++) {
+            Role item = this.arrays.get(i);
+                if (item.getId().equals(id)) {
                     this.arrays.set(i, model);
                     res = true;
                     break;
                 }
             }
-            return res;
-        }
+        return res;
+    }
     @Override
     public boolean delete(String id) {
         boolean res = false;
-        for (Role  i: this.arrays) {
-            if (i.getId().equals(id)) {
-                arrays.remove(index);
+        for (int i = 0; i < this.arrays.size(); i++) {
+            Role item = this.arrays.get(i);
+            if (item.getId().equals(id)) {
+                arrays.remove(i);
                 res = true;
                 break;
             }
@@ -52,9 +51,10 @@ public class RoleStore implements Store<Role> {
     @Override
     public Role findById(String id) {
         Role res = null;
-        for (Role i : this.arrays) {
-            if (i.getId().equals(id)) {
-                res = this.arrays.get(index);
+        for (int i = 0; i < this.arrays.size(); i++) {
+            Role item = this.arrays.get(i);
+            if (item.getId().equals(id)) {
+                res = this.arrays.get(i);
             }
         }
         return res;
