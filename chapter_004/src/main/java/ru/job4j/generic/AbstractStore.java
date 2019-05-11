@@ -3,8 +3,13 @@ package ru.job4j.generic;
 public abstract class AbstractStore<T extends Base> implements Store<T> {
 
     private SimpleArray<T> arrays;
-    private int index = 0;
+    int index = 0;
 
+    public AbstractStore(SimpleArray<T> arrays) {
+        this.arrays = arrays;
+    }
+
+    @Override
     public void add(T model) {
         this.arrays.add(model);
     }

@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.ArrayList;
 public class RoleStore extends AbstractStore<Role> {
 
-    private SimpleArray<Role> arrays;
-
     public RoleStore(SimpleArray <Role> arrays) {
-        this.arrays = arrays;
+        super(arrays);
     }
+
 
     @Override
     public void add(Role model) {
@@ -34,5 +33,15 @@ public class RoleStore extends AbstractStore<Role> {
     @Override
     public Role findById(String id) {
         return super.findById(id);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
