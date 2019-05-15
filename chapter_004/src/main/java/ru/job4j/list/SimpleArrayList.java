@@ -18,13 +18,14 @@ public class SimpleArrayList<E> {
     /**
      * Реализовать метод удаления первого элемент в списке.
      */
-    public void delete(E data) {
-        Node<E> newLink = new Node<>(data);
-        newLink.next = this.first;
-        this.first = newLink;
+    public E delete() {
+        Node<E> tmp = this.first;
+        this.first = this.first.next;
+        tmp.next = null;
         this.size--;
-    }
+        return tmp.data;
 
+    }
     /**
      * Метод получения элемента по индексу.
      */
