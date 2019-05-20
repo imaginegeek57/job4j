@@ -8,11 +8,16 @@ public class ListStore<E> implements Iterable<E>  {
 
     private Object[] container;
     private int index = 0;
+    private int size = 0;
 
-    public int size() {
-        return this.index;
+    public ListStore(Object[] container) {
+        this.container = container;
+
     }
-
+    public ListStore(int size) {
+        this.size = size;
+        this.container = new Object[size];
+    }
     public void add(E value) {
         this.container[index++] = value;
     }
@@ -22,8 +27,16 @@ public class ListStore<E> implements Iterable<E>  {
     }
 
     public void copy () {
-        int[] copy = new int[] {container.length};
-        int[] newCopy = Arrays.copyOf(copy, copy.length * 2);
+        if (size == container.length) {
+        resize(container.length * 2);
+        }
+    }
+    public void resize (int capacity) {
+        Object[] copy = new Object[capacity];
+        for (int i = 0; i < container.length; i++) {
+            copy[i] = container[i];
+            container = copy;
+        }
     }
 
     public Iterator <E> iterator() {
