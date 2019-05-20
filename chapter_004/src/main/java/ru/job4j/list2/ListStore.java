@@ -3,6 +3,7 @@ package ru.job4j.list2;
 import java.util.*;
 import java.util.function.Consumer;
 
+
 public class ListStore<E> implements Iterable<E>  {
 
     private Object[] container;
