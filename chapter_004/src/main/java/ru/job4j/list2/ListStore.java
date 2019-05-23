@@ -3,7 +3,6 @@ package ru.job4j.list2;
 import java.util.*;
 import java.util.function.Consumer;
 
-
 public class ListStore<E> implements Iterable<E>  {
 
     private Object[] container;
@@ -17,7 +16,6 @@ public class ListStore<E> implements Iterable<E>  {
             copy();
         }
         container[index++] = value;
-        index++;
     }
 
     public E get(int position) {
@@ -25,10 +23,8 @@ public class ListStore<E> implements Iterable<E>  {
     }
 
     public void copy () {
-        int[] copy = new int[] {container.length};
-        int[] newCopy = Arrays.copyOf(copy,copy.length * 2);
+        this.container = Arrays.copyOf(container,container.length * 2);
     }
-
     public Iterator <E> iterator() {
         return new Iterator <E>() {
             int str;
