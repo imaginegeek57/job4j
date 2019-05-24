@@ -8,6 +8,7 @@ public class listNode<E> implements Iterable<E> {
 
     private int size;
     private Node<E> first;
+
     /**
      * Метод вставляет в начало списка данные.
      */
