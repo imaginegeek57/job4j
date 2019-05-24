@@ -19,4 +19,13 @@ public class listNodeTest {
         assertThat(result, is("A2"));
         assertThat(node.getSize(), is(6));
     }
+    @Test
+    public void whenUseNext() {
+        listNode <String> node = new listNode <>();
+        node.add("A1");
+        node.add("A2");
+        node.add("A3");
+        String result = node.iterator().next();  // next возрощает только первое значение, я его правильно вызвал?
+        assertThat(result, is( ));  // как корректно записать результат ожидания чтобы вернуть именно ("A1","A2","A3")?
+    }
 }
