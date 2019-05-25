@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class listNode<E> implements Iterable<E> {
+public class ListNode<E> implements Iterable<E> {
 
     private int size;
     private Node<E> first;
