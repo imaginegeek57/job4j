@@ -14,13 +14,13 @@ public class listNodeTest {
     @Before
     public void addIntoStore() {
         node = new listNode <>();
-       it = node.iterator();
         node.add(0);
         node.add(1);
         node.add(2);
         node.add(3);
         node.add(4);
         node.add(5);
+        it = node.iterator();
     }
     @Test
     public void whenUseNode() {
@@ -30,16 +30,17 @@ public class listNodeTest {
     }
     @Test
     public void whenUseNext() {
-        assertThat(it.next(), is(1));
-        assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(2));
-        assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(5));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(4));
         assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(0));
         assertThat(it.hasNext(), is(false));
-        it.next();
     }
 }

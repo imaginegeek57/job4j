@@ -8,6 +8,7 @@ public class listNode<E> implements Iterable<E> {
 
     private int size;
     private Node<E> first;
+    private int modCount;
 
     /**
      * Метод вставляет в начало списка данные.
@@ -17,6 +18,7 @@ public class listNode<E> implements Iterable<E> {
         Node<E> newLink = new Node<>(data);
         newLink.next = this.first;
         this.first = newLink;
+        modCount++;
         this.size++;
     }
     /**
@@ -49,8 +51,12 @@ public class listNode<E> implements Iterable<E> {
     public Iterator <E> iterator() {
         return new Iterator <E>() {
             private Node<E> node = first;
+            private final int expectedModCount = modCount;
+
             @Override
             public boolean hasNext() {
+                if (modCount != expectedModCount)
+                    throw new ConcurrentModificationException();
                 return node != null;
             }
             @Override
