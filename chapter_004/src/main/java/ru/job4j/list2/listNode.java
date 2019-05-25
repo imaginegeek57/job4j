@@ -8,9 +8,11 @@ public class listNode<E> implements Iterable<E> {
 
     private int size;
     private Node<E> first;
+
     /**
      * Метод вставляет в начало списка данные.
      */
+
     public void add(E data) {
         Node<E> newLink = new Node<>(data);
         newLink.next = this.first;
@@ -46,18 +48,18 @@ public class listNode<E> implements Iterable<E> {
     @Override
     public Iterator <E> iterator() {
         return new Iterator <E>() {
-
+            private Node<E> node = first;
             @Override
             public boolean hasNext() {
-                return first != null;
+                return node != null;
             }
             @Override
             public E next() {
                 if(!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                E result = first.data;
-                first = first.next;
+                E result = node.data;
+                node = node.next;
                 return result;
             }
         };

@@ -1,31 +1,45 @@
 package ru.job4j.list2;
 
+import org.junit.Before;
 import org.junit.Test;
+import java.util.Iterator;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class listNodeTest {
+    private listNode<Integer> node;
+    private Iterator<Integer> it;
 
+    @Before
+    public void addIntoStore() {
+        node = new listNode <>();
+       it = node.iterator();
+        node.add(0);
+        node.add(1);
+        node.add(2);
+        node.add(3);
+        node.add(4);
+        node.add(5);
+    }
     @Test
-    public void whenWeTry() {
-        listNode <String> node = new listNode <>();
-        node.add("Hi");
-        node.add("A1");
-        node.add("A2");
-        node.add("A3");
-        node.add("A4");
-        node.add("A5");
-        String result = node.get(3);
-        assertThat(result, is("A2"));
+    public void whenUseNode() {
+        Integer result = node.get(3);
+        assertThat(result, is(2));
         assertThat(node.getSize(), is(6));
     }
     @Test
     public void whenUseNext() {
-        listNode <String> node = new listNode <>();
-        node.add("A1");
-        node.add("A2");
-        node.add("A3");
-        String result = node.iterator().next();  // next возрощает только первое значение, я его правильно вызвал?
-        assertThat(result, is( ));  // как корректно записать результат ожидания чтобы вернуть именно ("A1","A2","A3")?
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(4));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(5));
+        assertThat(it.hasNext(), is(false));
+        it.next();
     }
 }
