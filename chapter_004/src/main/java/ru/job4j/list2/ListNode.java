@@ -10,6 +10,12 @@ public class ListNode<E> implements Iterable<E> {
     private Node<E> first;
     private int modCount;
 
+    public ListNode(int size, Node <E> first, int modCount) {
+        this.size = size;
+        this.first = first;
+        this.modCount = modCount;
+    }
+
     /**
      * Метод вставляет в начало списка данные.
      */

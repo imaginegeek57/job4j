@@ -4,22 +4,21 @@ import java.util.NoSuchElementException;
 
 public class SimpleStack<E>  {
 
-    private ListNode <E> node = null;
+    private ListNode <E> node;
 
     public SimpleStack(ListNode <E> node) {
         this.node = node;
     }
-    public void push(E value) {
-        ListNode <E> last = new ListNode <>();
-        last.add(value);
-    }
-    public E poll() {
-        ListNode <E> last = new ListNode <>();
-        if (node.getSize() == 0) {
-            throw new NoSuchElementException(); // здесь другое исключение?
-        }
-        E result = node. ;  //
 
+    public void push(E value) {
+        this.node.add(value);
+    }
+
+    public E poll() {
+        if (this.node.getSize() == 0) {
+            throw new NoSuchElementException();
+        }
+        E result = node;
         return result;
     }
 }
