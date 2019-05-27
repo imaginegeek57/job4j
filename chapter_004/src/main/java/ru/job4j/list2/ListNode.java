@@ -10,12 +10,6 @@ public class ListNode<E> implements Iterable<E> {
     private Node<E> first;
     private int modCount;
 
-    public ListNode(int size, Node <E> first, int modCount) {
-        this.size = size;
-        this.first = first;
-        this.modCount = modCount;
-    }
-
     /**
      * Метод вставляет в начало списка данные.
      */
@@ -52,6 +46,14 @@ public class ListNode<E> implements Iterable<E> {
         Node(E data) {
             this.data = data;
         }
+    }
+    public E delete() {
+        Node<E> tmp = this.first;
+        this.first = this.first.next;
+        tmp.next = null;
+        modCount--;
+        size--;
+        return tmp.data;
     }
     @Override
     public Iterator <E> iterator() {

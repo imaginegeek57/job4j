@@ -6,8 +6,8 @@ public class SimpleStack<E>  {
 
     private ListNode <E> node;
 
-    public SimpleStack(ListNode <E> node) {
-        this.node = node;
+    public SimpleStack() {
+        this.node = new ListNode <>();
     }
 
     public void push(E value) {
@@ -18,7 +18,7 @@ public class SimpleStack<E>  {
         if (this.node.getSize() == 0) {
             throw new NoSuchElementException();
         }
-        E result = node;
+        E result = this.node.delete();
         return result;
     }
 }
