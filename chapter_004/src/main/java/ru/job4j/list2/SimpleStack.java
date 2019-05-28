@@ -5,9 +5,14 @@ import java.util.NoSuchElementException;
 public class SimpleStack<E>  {
 
     private ListNode <E> node;
+    private int size = 0;
 
     public SimpleStack() {
         this.node = new ListNode <>();
+
+    }
+    public int size() {
+        return this.size;
     }
 
     public void push(E value) {

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ListNode<E> implements Iterable<E> {
-
     private int size;
     private Node<E> first;
     private int modCount;
