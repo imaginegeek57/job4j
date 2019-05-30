@@ -9,7 +9,6 @@ public class SimpleStack<E>  {
 
     public SimpleStack() {
         this.node = new ListNode <>();
-
     }
     public int size() {
         return this.size;
@@ -25,5 +24,9 @@ public class SimpleStack<E>  {
         }
         E result = this.node.delete();
         return result;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 }
