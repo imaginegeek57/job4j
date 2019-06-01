@@ -16,6 +16,7 @@ public class SimpleStack<E>  {
 
     public void push(E value) {
         this.node.add(value);
+        size++;
     }
 
     public E poll() {

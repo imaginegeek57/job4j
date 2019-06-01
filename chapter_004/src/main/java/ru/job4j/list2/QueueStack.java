@@ -4,25 +4,32 @@ import java.util.NoSuchElementException;
 
 public class QueueStack<E> {
 
-    private SimpleStack<E> in = new SimpleStack <>();
-    private SimpleStack<E> out = new SimpleStack <>();
+    private SimpleStack<E> in;
+    private SimpleStack<E> out;
     private int size;
 
+    public QueueStack() {
+        this.in = new SimpleStack <>();
+        this.out = new SimpleStack <>();
+    }
 
     public void push(E value) {
         this.in.push(value);
+        size++;
     }
 
     public E poll() {
-        if (out.isEmpty())
-            while (!in.isEmpty())
+        if(out.isEmpty()){
+            while(!in.isEmpty()){
                 out.push(in.poll());
-        E temp = null;
-        if (!out.isEmpty()) {
-            temp = out.poll();
+            }
+        }
+        E result = null;
+        if(!out.isEmpty()) {
+            result = out.poll();
             size--;
         }
-        return temp;
+        return result;
     }
 
     public int size() {

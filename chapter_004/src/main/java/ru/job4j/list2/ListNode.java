@@ -12,7 +12,6 @@ public class ListNode<E> implements Iterable<E> {
     /**
      * Метод вставляет в начало списка данные.
      */
-
     public void add(E data) {
         Node<E> newLink = new Node<>(data);
         newLink.next = this.first;

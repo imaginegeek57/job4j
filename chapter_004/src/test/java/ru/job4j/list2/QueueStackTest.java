@@ -18,5 +18,4 @@ public class QueueStackTest {
         assertThat(ss.poll(), is ("A2"));
         assertThat(ss.poll(), is ("A3"));
     }
-
 }
