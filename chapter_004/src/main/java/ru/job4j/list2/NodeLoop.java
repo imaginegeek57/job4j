@@ -10,6 +10,10 @@ public class NodeLoop<T> implements Iterable<T> {
     private Node<T> next;
     private int modCount;
 
+    public NodeLoop(T value) {
+        this.value = value;
+    }
+
     boolean hasCycle(Node first) {
         Node fast = first;
         Node slow = first;
@@ -29,6 +33,15 @@ public class NodeLoop<T> implements Iterable<T> {
             this.data = data;
         }
     }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public void setNext(Node <T> next) {
+        this.next = next;
+    }
+
     @Override
     public Iterator <T> iterator() {
         return new Iterator <T>() {
