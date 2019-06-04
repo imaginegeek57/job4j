@@ -16,13 +16,14 @@ public class SimpleStack<E>  {
 
     public void push(E value) {
         this.node.add(value);
-        size++;
+        this.size++;
     }
 
     public E poll() {
         if (this.node.getSize() == 0) {
             throw new NoSuchElementException();
         }
+        this.size--;
         E result = this.node.delete();
         return result;
     }
