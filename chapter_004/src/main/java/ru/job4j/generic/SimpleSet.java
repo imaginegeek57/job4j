@@ -4,19 +4,21 @@ import java.util.Iterator;
 
 public class SimpleSet<T> implements Iterable<T> {
 
-    private Object[] objects;
     private int index;
-    SimpleArray array = new SimpleArray(index);
+    private SimpleArray<T> array;
+
+    public SimpleSet(SimpleArray array) {
+        this.array = new SimpleArray(index);
+    }
 
     public boolean add(T data) {
-        if(data.equals(objects)) {
-            return false;
+        for (T i : this.array) {
+            if (i.equals(data)) {
+                return false;
+            }
         }
-        array.add(data);
+        this.array.add(data);
         return true;
-    }
-    public SimpleSet(int size) {
-        this.objects = new Object[size];
     }
     public int size() {
         return array.size();
@@ -26,7 +28,6 @@ public class SimpleSet<T> implements Iterable<T> {
     }
     public T remove(int index) {
         return (T) array.remove(index);
-
     }
     @Override
     public Iterator <T> iterator() {
