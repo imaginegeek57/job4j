@@ -7,7 +7,7 @@ public class SimpleSet<T> implements Iterable<T> {
     private int index;
     private SimpleArray<T> array;
 
-    public SimpleSet(SimpleArray array) {
+    public SimpleSet(int index) {
         this.array = new SimpleArray(index);
     }
 

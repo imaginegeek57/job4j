@@ -13,7 +13,6 @@ public class SimpleArray<T> implements Iterable<T> {
     public SimpleArray(int size) {
         this.objects = new Object[size];
     }
-
     public int size() {
         return this.index;
     }
@@ -42,7 +41,6 @@ public class SimpleArray<T> implements Iterable<T> {
         this.objects[--index] = null;
         return res;
     }
-
 
     public Iterator <T> iterator() {
         return new Iterator <T>() {
