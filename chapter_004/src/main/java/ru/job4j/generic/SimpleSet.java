@@ -12,14 +12,21 @@ public class SimpleSet<T> implements Iterable<T> {
     }
 
     public boolean add(T data) {
+        if(!check(data)) {
+            return false;
+        }
+        this.array.add(data);
+        return true;
+    }
+    public boolean check(T data) {
         for (T i : this.array) {
             if (i.equals(data)) {
                 return false;
             }
         }
-        this.array.add(data);
-        return true;
+       return true;
     }
+
     public int size() {
         return array.size();
     }
