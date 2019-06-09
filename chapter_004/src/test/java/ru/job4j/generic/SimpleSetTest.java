@@ -7,9 +7,8 @@ import java.util.Iterator;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-public class SimpleSetTest {
 
-    private Iterator<Integer> it;
+public class SimpleSetTest {
 
     @Test
     public void useSet() {
@@ -28,9 +27,12 @@ public class SimpleSetTest {
         simpleSet.add(3);
         simpleSet.add(null);
         simpleSet.add(null);
+        Iterator<Integer> it = simpleSet.iterator();
+        while (it.hasNext());
         for (int i : simpleSet) {
-            assertThat(simpleSet.get(i), is(3, null));
+            int result = simpleSet.get(i);
 
+            assertThat(result, is(it.next()));
         }
     }
 }

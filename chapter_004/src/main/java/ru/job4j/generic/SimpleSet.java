@@ -15,6 +15,9 @@ public class SimpleSet<T> implements Iterable<T> {
         if(!check(data)) {
             return false;
         }
+        if (data == null) {
+            throw new NullPointerException();
+        }
         this.array.add(data);
         return true;
     }

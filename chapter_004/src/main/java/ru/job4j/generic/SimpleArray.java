@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] objects;
