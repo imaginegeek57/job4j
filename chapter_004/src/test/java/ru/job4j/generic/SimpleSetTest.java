@@ -25,14 +25,14 @@ public class SimpleSetTest {
         SimpleSet <Integer> simpleSet = new SimpleSet <Integer>(5);
         simpleSet.add(3);
         simpleSet.add(3);
-        simpleSet.add(null);
-        simpleSet.add(null);
+        simpleSet.add(1);
+        simpleSet.add(1);
         Iterator<Integer> it = simpleSet.iterator();
-        while (it.hasNext());
-        for (int i : simpleSet) {
-            int result = simpleSet.get(i);
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(false));
 
-            assertThat(result, is(it.next()));
-        }
+
     }
 }

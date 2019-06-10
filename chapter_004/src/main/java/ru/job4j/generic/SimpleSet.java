@@ -1,6 +1,7 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<T> implements Iterable<T> {
 
@@ -15,19 +16,16 @@ public class SimpleSet<T> implements Iterable<T> {
         if(!check(data)) {
             return false;
         }
-        if (data == null) {
-            throw new NullPointerException();
-        }
         this.array.add(data);
         return true;
     }
     public boolean check(T data) {
         for (T i : this.array) {
-            if (i.equals(data)) {
+            if (Objects.equals(i, data)) {
                 return false;
             }
         }
-       return true;
+        return true;
     }
 
     public int size() {
