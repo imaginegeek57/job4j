@@ -1,7 +1,6 @@
 package ru.job4j.map;
 
 public class Item<K, V> {
-
     private K key;
     private V value;
 
