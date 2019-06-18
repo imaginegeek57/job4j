@@ -22,7 +22,7 @@ public class HashTable<K, V> {
     }
     public void insert(K key, V value) {
         Item item = new Item(key, value);
-        int hash = hash((Integer) key);
+        int hash = hash(key.hashCode());
         while(table[hash] != null) {
             hash++;
             hash %= size;
@@ -32,26 +32,12 @@ public class HashTable<K, V> {
     public V get(K key) {
         V value = null;
         for (int i = 0; i < size; i++) {
-
             if (table[i].getKey().equals(key)) {
                 value = (V) table[i].getValue();
                 break;
             }
         }
         return value;
-    }
-    public void put(K key, V value) {
-        boolean flag = true;
-        for (int i = 0; i < size; i++) {
-            if (table[i].getKey().equals(key)) {
-                table[i].setValue(value);
-                flag = false;
-                break;
-            }
-        }
-        if (flag) {
-            table[size++] = new Item(key, value);
-        }
     }
 
     public boolean delete(K key) {
