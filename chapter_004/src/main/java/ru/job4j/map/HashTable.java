@@ -20,25 +20,30 @@ public class HashTable<K, V> {
     static int indexFor(int h, int length) {
         return h & (length - 1);
     }
+    void addEntry(int hash, K key, V value, int index) {
+        Item<K, V> e = table[index];
+        table[index] = new Item(key, value);
+    }
     public void insert(K key, V value) {
         Item item = new Item(key, value);
         int hash = hash(key.hashCode());
-        while(table[hash] != null) {
-            hash++;
-            hash %= size;
+        int i = indexFor(hash, table.length);
+        for (Item<K, V> e = table[i]; e != null;) {
+            count++;
+            addEntry(hash, key, value, i);
         }
-        table[hash] = item;
     }
-    public V get(K key) {
-        V value = null;
-        for (int i = 0; i < size; i++) {
-            if (table[i].getKey().equals(key)) {
-                value = (V) table[i].getValue();
-                break;
-            }
-        }
-        return value;
-    }
+
+//    public V get(K key) {
+//        V value = null;
+//        for (int i = 0; i < table.length; i++) {
+//            if (table[i].equals(key.hashCode())) {
+//                value = (V) table[i].getValue();
+//                break;
+//            }
+//        }
+//        return value;
+//    }
 
     public boolean delete(K key) {
         boolean flag = false;
