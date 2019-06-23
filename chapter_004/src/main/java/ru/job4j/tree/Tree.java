@@ -11,6 +11,11 @@ public class Tree<E extends Comparable <E>> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
+        Node<E> t = root;
+        if (t == null) {
+            root = new Node<E>(parent);
+            return true;
+        }
      return false;
     }
 
@@ -31,4 +36,5 @@ public class Tree<E extends Comparable <E>> implements SimpleTree<E> {
         }
         return rsl;
     }
+
 }
