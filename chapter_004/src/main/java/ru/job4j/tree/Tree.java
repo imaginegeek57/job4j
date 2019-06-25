@@ -1,8 +1,6 @@
 package ru.job4j.tree;
 
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree<E extends Comparable <E>> implements SimpleTree<E> {
 
@@ -11,11 +9,13 @@ public class Tree<E extends Comparable <E>> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        Node<E> t = root;
-        if (t == null) {
-            root = new Node<E>(parent);
-            return true;
-        }
+      Optional<Node<E>> byParent = findBy(parent);
+      if(byParent.isPresent()) {
+          Optional<Node<E>> byChild = findBy(child);
+          if (byChild.isEmpty()) {
+              byParent.get().add(new Node <>(child));
+          }
+      }
      return false;
     }
 
@@ -37,4 +37,19 @@ public class Tree<E extends Comparable <E>> implements SimpleTree<E> {
         return rsl;
     }
 
+//    Iterator it = new Iterator() {
+//        int ind;
+//        @Override
+//        public boolean hasNext() {
+//            return ind < nodes.length;
+//        }
+//
+//        @Override
+//        public E next() {
+//            if (!hasNext()) {
+//                throw new NoSuchElementException();
+//            }
+//            return (E) nodes[ind++];
+//        }
+//    };
 }
