@@ -1,13 +1,11 @@
 package ru.job4j.tree;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
  * @since 0.1
  */
-
 public class Node<E extends Comparable<E>> {
 
     final List<Node<E>> children = new ArrayList<>();
