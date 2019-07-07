@@ -11,17 +11,26 @@ public class Config {
     public Config(String path) {
         this.path = path;
     }
+
     public void load() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(String.valueOf(values)));
-            br.readLine();  // здесь добавить while?
-        } catch (IOException e) {
-            e.printStackTrace();
+        try ( BufferedReader br = new BufferedReader(new FileReader(String.valueOf(values)))) {
+            String strLine;
+            while ((strLine = br.readLine()) != null)   {
+                System.out.println (strLine);
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
-
     public String value(String key) {
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        Map<String, String> values = new HashMap<String, String>();
+        for (String i : values.keySet()) {
+            if(i.equals(key)) {
+                return key;
+            }else
+                throw new UnsupportedOperationException("Don't impl this method yet!");
+        }
+        return key;
     }
 
     @Override
