@@ -13,24 +13,32 @@ public class Config {
     }
 
     public void load() {
-        try ( BufferedReader br = new BufferedReader(new FileReader(String.valueOf(values)))) {
-            String strLine;
-            while ((strLine = br.readLine()) != null)   {
-                System.out.println (strLine);
+        Map <String, String> values = new HashMap <String, String>();
+        try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
+            String strLine = null;
+            while ((strLine = br.readLine()) != null) {
+                if (strLine.equals("=")) {
+                    String[] entry = strLine.split("=");
+                    String k = entry[0];
+                    String v = entry[1];
+                    values.put(entry[0], entry[1]);
+                }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+            e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         }
     }
+
     public String value(String key) {
-        Map<String, String> values = new HashMap<String, String>();
-        for (String i : values.keySet()) {
-            if(i.equals(key)) {
-                return key;
-            }else
+        Map <String, String> values = new HashMap <String, String>();
+        for (Map.Entry entry : values.entrySet()) {
+            if (key.equals(entry)) {
+                return String.valueOf(entry);
+            } else
                 throw new UnsupportedOperationException("Don't impl this method yet!");
         }
-        return key;
+        return String.valueOf(entry);
     }
 
     @Override
