@@ -13,7 +13,6 @@ public class Config {
     }
 
     public void load() {
-        Map <String, String> values = new HashMap <String, String>();
         try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
             String strLine = null;
             while ((strLine = br.readLine()) != null) {
@@ -31,14 +30,11 @@ public class Config {
     }
 
     public String value(String key) {
-        Map <String, String> values = new HashMap <String, String>();
-        for (Map.Entry entry : values.entrySet()) {
-            if (key.equals(entry)) {
-                return String.valueOf(entry);
-            } else
+        String v = values.get(key);
+        if (v == null) {
                 throw new UnsupportedOperationException("Don't impl this method yet!");
         }
-        return String.valueOf(entry);
+        return v;
     }
 
     @Override
