@@ -13,7 +13,7 @@ public class ConfigTest {
 
     private Config config = new Config(this.path);
     private final Map <String, String> values = new HashMap <String, String>();
-    private String path = "app.properties.txt";
+    private String path = "path/app.properties.txt";
 
     @Override
     public String toString() {

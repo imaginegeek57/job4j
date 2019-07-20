@@ -50,6 +50,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("app.properties.txt"));
+        System.out.println(new Config("path/app.properties.txt"));
     }
 }
