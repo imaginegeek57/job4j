@@ -17,7 +17,7 @@ public class Config {
         try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
             String strLine = null;
             while ((strLine = br.readLine()) != null) {
-                if (strLine.equals("=")) {
+                if (strLine.contains("=")) {
                     String[] entry = strLine.split("=");
                     String k = entry[0];
                     String v = entry[1];

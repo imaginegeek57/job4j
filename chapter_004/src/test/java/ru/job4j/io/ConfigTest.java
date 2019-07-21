@@ -11,24 +11,11 @@ import static org.junit.Assert.*;
 
 public class ConfigTest {
 
-    private Config config = new Config(this.path);
-    private final Map <String, String> values = new HashMap <String, String>();
-    private String path = "path/app.properties.txt";
-
-    @Override
-    public String toString() {
-        StringJoiner out = new StringJoiner(System.lineSeparator());
-        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().forEach(out::add);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return out.toString();
-    }
     @Test
     public void useTest() {
+        Config config = new Config("path/app.properties.txt");
         config.load();
-        String result = values.get("hibernate.dialect");
+        String result = config.value("hibernate.dialect");
         assertThat(result, is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 }
