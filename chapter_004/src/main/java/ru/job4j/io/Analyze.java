@@ -28,6 +28,5 @@ public class Analyze {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
