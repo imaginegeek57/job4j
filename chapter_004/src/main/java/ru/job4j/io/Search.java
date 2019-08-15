@@ -14,16 +14,15 @@ public class Search {
 
     public static List <File> searchFiles(String parent, List <String> exts) {
 
-        exts = Arrays.asList(".txt");  // думаю здесь использовать lastIndexOf или FilenameUtils.getExtension или не верно думаю?
-
-        File[] files = new File(parent).listFiles();
-        for (File f : files) {
-            if (f.isDirectory()) {
-                List <File> loc = searchFiles(f.getPath(), exts);
-                if (loc != null)
-                    return loc;
+        parent = "C/projects/somethingElse/cats.txt"; //
+        File[] files = new File(parent).listFiles(); //возвращает массив файлов и подкаталогов которы по пути parent
+        for (File f : files) {   // проверяем в цикле все файлы и папки
+            if (f.isDirectory()) { //если объект является каталогом то получаем его имя + обозначение
+                System.out.println(f.getName() + "folder");
+            } else {
+                System.out.println(f.getName() + "file");  //если файл является каталогом то получаем его имя + обозначение
             }
         }
-        return null;
+        return null;   // хотел сделать метод void но idea ругается, возращать ноль как-то тупо но умнее ничего не придумал)
     }
 }
