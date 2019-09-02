@@ -42,8 +42,6 @@ public class Search {
 
     public List <File> searchFiles(String parent, List <String> exts) {
         List <File> search = search(parent);
-        exts.add(".txt");
-        exts.add(".doc");
         FileFilter fileFilter = new WildcardFileFilter(exts);
         while (search.isEmpty() == false) {
             for (File f : search)

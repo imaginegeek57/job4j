@@ -12,8 +12,8 @@ public class SearchTest {
     @Test
     public void searchTest() {
         Search search = new Search();
-        String parent = "C:\\projects\\prfl";
-        List <File> files = search.searchFiles(parent, Arrays.asList(".txt"));
+        String property = System.getProperty("java.io.tmpdir");
+        List <File> files = search.searchFiles(property, Arrays.asList(".txt"));
         files.forEach(file -> System.out.println(file.getName()));
     }
 }
