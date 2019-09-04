@@ -43,7 +43,7 @@ public class Search {
     public List <File> searchFiles(String parent, List <String> exts) {
         List <File> search = search(parent);
         FileFilter fileFilter = new WildcardFileFilter(exts);
-        while (search.isEmpty() == false) {
+        while (search.isEmpty() == true) {
             for (File f : search)
                 search.addAll(Arrays.asList(f.listFiles(fileFilter)));
         }
@@ -52,7 +52,7 @@ public class Search {
 
     public static void main(String[] args) throws IOException {
         Search search = new Search();
-        String property = System.getProperty("user.dir");
+        String property = System.getProperty("java.io.tmpdir");
         List <File> files = search.searchFiles(property, Arrays.asList(".class"));
         files.forEach(file -> System.out.println(file.getName()));
     }
