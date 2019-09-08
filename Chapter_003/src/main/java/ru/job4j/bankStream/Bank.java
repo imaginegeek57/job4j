@@ -24,19 +24,19 @@ public class Bank {
 
     //получить список счетов для пользователя
     public List <Account> getUserAccounts(String passport) {
-        List <Account> accounts = null;
         return data.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .map(accounts -> )
-
-                .collect(Collectors.toList());
+                .map(user -> data.get(user)).findFirst()
+                .orElse(new ArrayList <>());
     }
 
-  //  добавить счёт пользователю.
+    //  добавить счёт пользователю.
     public void addAccountToUser(String passport, Account account) {
         data.keySet().stream()
-                .filter(data -> data.getPassport().equals(passport))
-                .filter(accounts -> accounts.equals(account))
+                .filter(user -> user.getPassport().equals(passport))
+                .map(user -> data.get(user))
+                .filter(accounts -> accounts.contains(account))
+                .map(user -> data.get(user).add(account))
                 .collect(Collectors.toList());
     }
 
@@ -44,20 +44,34 @@ public class Bank {
     // удалить один счёт пользователя.
     public void deleteAccountFromUser(String passport, Account account) {
         data.keySet().stream()
-                .map(user-> user.getPassport().equals(passport))
-                .removeif(accounts -> accounts.equals(account))
-                        .collect(Collectors.toList());
+                .filter(user -> user.getPassport().equals(passport))
+                .map(user -> data.get(user))
+                .filter(accounts -> accounts.contains(account))
+                .map(user -> data.get(user).remove(account))
+                .collect(Collectors.toList());
+    }
+
+
+    //поиска аккаунта по реквизитам и паспорту
+    public Account getActualAccount(String passport, String requisites) {
+        return (Account) data.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .map(user -> data.get(user))
+                .map(accounts -> accounts.contains(requisites))
+                .collect(Collectors.toList());
     }
 
     //перевод денег
-//    public boolean transferMoney(String srcPassport, String srcRequisite,
-//                                 String destPassport, String dstRequisite, double amount) {
-//        boolean res = false;
-//        final Account account = getActualAccount(srcPassport, srcRequisite);
-//        final Account account1 = getActualAccount(srcPassport, srcRequisite);
-//        if (account != null && account1 != null) {
-//            res = account.transfer(account1, amount);
-//        }
-//        return res;
-//    }
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String dstRequisite, double amount) {
+
+
+        boolean res = false;
+        final Account account =  getActualAccount(srcPassport, srcRequisite);
+        final Account account1 = getActualAccount(srcPassport, srcRequisite);
+        if (account != null && account1 != null) {
+            res = account.transfer(account1, amount);
+        }
+        return res;
+    }
 }
