@@ -21,10 +21,15 @@ public class Bank {
         data.remove(user);
     }
 
+
     //получить список счетов для пользователя
     public List <Account> getUserAccounts(String passport) {
-        return data.keySet().stream().filter(data->data.getPassport().equals(passport))
-                .collect(Collectors.toList());  //почему idea ругается?
+        List <Account> accounts = null;
+        return data.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .map(accounts -> )
+
+                .collect(Collectors.toList());
     }
 
   //  добавить счёт пользователю.

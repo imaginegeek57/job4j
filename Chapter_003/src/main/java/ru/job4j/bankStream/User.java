@@ -2,7 +2,6 @@ package ru.job4j.bankStream;
 
 import java.util.Objects;
 
-
 public class User {
     private String name;
     private String passport;
