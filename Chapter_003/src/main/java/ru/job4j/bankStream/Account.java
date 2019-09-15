@@ -38,5 +38,13 @@ public class Account {
     public int hashCode() {
         return Objects.hash(value, requisites);
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "value=" + value +
+                ", requisites='" + requisites + '\'' +
+                '}';
+    }
 }
 

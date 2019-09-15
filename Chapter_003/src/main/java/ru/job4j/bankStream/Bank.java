@@ -34,8 +34,6 @@ public class Bank {
     public void addAccountToUser(String passport, Account account) {
         data.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .map(user -> data.get(user))
-                .filter(accounts -> accounts.contains(account))
                 .map(user -> data.get(user).add(account))
                 .collect(Collectors.toList());
     }
@@ -45,8 +43,6 @@ public class Bank {
     public void deleteAccountFromUser(String passport, Account account) {
         data.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .map(user -> data.get(user))
-                .filter(accounts -> accounts.contains(account))
                 .map(user -> data.get(user).remove(account))
                 .collect(Collectors.toList());
     }
@@ -74,4 +70,6 @@ public class Bank {
         }
         return res;
     }
+
+
 }
