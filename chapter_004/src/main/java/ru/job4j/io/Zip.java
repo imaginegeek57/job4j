@@ -9,9 +9,12 @@ public class Zip {
 
     private List <File> exts(File dir, String ext) {
         List <File> fileList = new ArrayList <>(scan(dir));
-        for (File file : dir.listFiles()) {
-            if (file.getName().endsWith((ext))) {
-                fileList.add(file);
+        List <String> extsL = new ArrayList <>();
+        for (File file : fileList) {
+            for (String i : extsL) {
+                if (file.getName().endsWith((i))) {
+                    fileList.add(file);
+                }
             }
         }
         return fileList;
