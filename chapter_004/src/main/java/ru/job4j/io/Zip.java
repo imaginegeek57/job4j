@@ -9,15 +9,16 @@ public class Zip {
 
     private List <File> exts(File dir, List <String> ext) {
         List <File> fileList = new ArrayList <>(scan(dir));
+        List <File> fileList1 = new ArrayList <>(scan(dir));
         List <String> extsL = new ArrayList <>(ext);
         for (File file : fileList) {
             for (String i : extsL) {
                 if (file.getName().endsWith((i))) {
-                    fileList.add(file);
+                    fileList1.add(file);
                 }
             }
         }
-        return fileList;
+        return fileList1;
     }
 
     private List <File> scan(File file) {
