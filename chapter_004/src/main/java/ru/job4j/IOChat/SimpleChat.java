@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.logging.Logger;
 
 public class SimpleChat {
+
+    private static final Logger log = Logger.getLogger(String.valueOf(SimpleChat.class));
+    private static ArrayList <String> logwriter = new ArrayList <>();
 
     public static void main(String[] args) throws IOException {
         ArrayList <String> answer = new ArrayList <>();
@@ -17,16 +21,22 @@ public class SimpleChat {
             while ((ans = br.readLine()) != null) {
                 answer.add(ans);
             }
+            log.info("ответы готовы!");
             Scanner scanner = new Scanner(System.in);
             System.out.println("input words: ");
-            ArrayList <String> list = new ArrayList <>();
             String text = null;
             do {
                 System.out.println("continue to chat taping");
                 text = scanner.nextLine();
-                System.out.println(answer.get(random()));
+                String response = answer.get(random());
+                System.out.println(response);
+                logwriter.add(text);
+                logwriter.add(response);
             } while (!text.equals("stop"));
-            list.add(text);
+            log.info("выход из чата");
+
+            System.out.println(logwriter);
+
             scanner.close();
         }
     }
