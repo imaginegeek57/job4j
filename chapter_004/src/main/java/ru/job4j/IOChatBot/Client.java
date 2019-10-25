@@ -24,14 +24,17 @@ public class Client {
         String response = null;
         do {
             System.out.println("Hello oracle");
-            request = console.nextLine();
-            out.println(request);
-            if ("exit".equals(request)) {
-                while (!(response = in.readLine()).isEmpty()) {
-                    System.out.println(response);
-                }
+            request = in.readLine();
+            System.out.println(request);
+            if ("hi".equals(request)) {
+                out.println("Hi wise friend, I'm a speaker.");
+                out.println();
+            } else if (!("exit".equals(request))) {
+                out.println("I don't get");
+                out.println();
             }
         } while (!("exit".equals(request)));
+        out.close();
     }
 
     public static void main(String[] args) throws IOException {
