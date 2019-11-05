@@ -39,8 +39,8 @@ public class SimpleChat {
         System.out.println("input words: ");
         String text = null;
         do {
-            System.out.println("continue to chat taping");
             text = scanner.nextLine();
+            System.out.println("continue to chat taping");
             String response = answer().get(random());
             System.out.println(response);
             logwriter.add(text);
