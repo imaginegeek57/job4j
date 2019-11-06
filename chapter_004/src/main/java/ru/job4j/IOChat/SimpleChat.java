@@ -37,11 +37,12 @@ public class SimpleChat {
     public static void init() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("input words: ");
+        List <String> answers = answer();
         String text = null;
         do {
             text = scanner.nextLine();
             System.out.println("continue to chat taping");
-            String response = answer().get(random());
+            String response = answers.get(random());
             System.out.println(response);
             logwriter.add(text);
             logwriter.add(response);
