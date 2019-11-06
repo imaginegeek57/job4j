@@ -1,60 +1,111 @@
 package ru.job4j.IOChat;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
 public class SimpleChat {
 
+    /**
+     * Логгер
+     */
     private static final Logger log = Logger.getLogger(String.valueOf(SimpleChat.class));
-    private static List <String> logwriter = new ArrayList <>();
 
-    public static List <String> answer() {
+    /**
+     * Стоп-слово
+     */
+    private static final String STOP_WORD = "stop";
+
+    public static void main(String[] args) throws IOException {
+        SimpleChat chat = new SimpleChat("randomList.txt");
+        chat.run();
+    }
+
+    /**
+     * Лог чата
+     * Содержит переписку
+     */
+    private List <String> chatLog = new LinkedList <>();
+
+    /**
+     * Ответы из файла
+     */
+    private List <String> answers;
+
+    /**
+     * Получить случайный ответ
+     *
+     * @return ответ
+     */
+    private String getRandomAnswer() {
+        return answers.get(ThreadLocalRandom.current().nextInt(answers.size()));
+    }
+
+    /**
+     * Файл с ответами
+     */
+    private File answersFile;
+
+    /**
+     * Конструктор
+     *
+     * @param answersFilePath путь к файлу с ответами
+     */
+    public SimpleChat(String answersFilePath) throws IOException {
+        this.answersFile = new File(answersFilePath);
+        this.answers = readAnswersFromFile(this.answersFile);
+    }
+
+    /**
+     * Чтение ответов из файла
+     *
+     * @param file файл с ответами
+     * @return список ответов
+     * @throws IOException исключение при чтении ответов из файла
+     */
+    private List <String> readAnswersFromFile(File file) throws IOException {
         List <String> list = new ArrayList <>();
-        try (BufferedReader br = new BufferedReader(new FileReader("randomList.txt"))) {
-            String ans = null;
-            while ((ans = br.readLine()) != null) {
+        log.info("Reading file with answers");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String ans;
+            while (((ans = br.readLine()) != null) && !ans.trim().isEmpty()) {
                 list.add(ans);
             }
-            log.info("ответы готовы!");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            log.info(String.format("%d answers were found and loaded", list.size()));
         }
         return list;
     }
 
-    public static int random() {
-        Random random = new Random();
-        int rnd = random.nextInt(6) + 1;
-        return rnd;
-    }
-
-    public static void init() {
+    /**
+     * Запуск чата
+     */
+    public void run() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("input words: ");
-        List <String> answers = answer();
-        String text = null;
+
+        System.out.println("Write your message to start the chat:");
+
+        String inputMessage = null;
+        String outputMessage = null;
         do {
-            text = scanner.nextLine();
-            System.out.println("continue to chat taping");
-            String response = answers.get(random());
-            System.out.println(response);
-            logwriter.add(text);
-            logwriter.add(response);
-        } while (!text.equals("stop"));
-        log.info("выход из чата");
-        System.out.println(logwriter);
+
+            inputMessage = scanner.nextLine();
+            chatLog.add(inputMessage);
+
+            outputMessage = getRandomAnswer();
+            chatLog.add(outputMessage);
+            System.out.println(outputMessage);
+
+            System.out.println("Write your answer:");
+
+        } while (!STOP_WORD.equalsIgnoreCase(inputMessage));
         scanner.close();
+
+        log.info("выход из чата");
+
+        System.out.println(chatLog);
     }
 
-    public static void main(String[] args) {
-        init();
-    }
 }
 
 
