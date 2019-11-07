@@ -7,12 +7,13 @@ import java.util.NoSuchElementException;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collection.iterator.Converter;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class IteratorOfIteratorsTest {
-    Iterator<Integer> it;
+    Iterator <Integer> it;
 
     @Before
     public void setUp () {

@@ -21,14 +21,14 @@ public class SimpleArrayListTest {
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
         assertThat(list.get(1), is(2));
     }
-
     @Test
     public void whenAddThreeElementsThenUseGetSizeResultThree() {
         assertThat(list.getSize(), is(3));
     }
     @Test
     public void whenDeleteElement() {
-        list.delete();
+        final Integer delete = list.delete();
+        assertThat(delete, is(3));
         assertThat(list.getSize(), is(2));
     }
 }

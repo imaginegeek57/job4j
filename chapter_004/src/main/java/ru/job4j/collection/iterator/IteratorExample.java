@@ -1,14 +1,16 @@
-package ru.job4j.collection;
+package ru.job4j.collection.iterator;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class IteratorExample implements Iterator {
-   int[][] value = {
+    int[][] value = {
             {1, 2},
             {3, 4}
     };
-    private int i,j;
-    IteratorExample(int[][] value) {
+    private int i, j;
+
+    public IteratorExample(int[][] value) {
         this.value = value;
         this.i = i;
         this.j = j;

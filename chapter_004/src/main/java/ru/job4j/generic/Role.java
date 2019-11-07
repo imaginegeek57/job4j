@@ -6,4 +6,9 @@ public class Role extends Base {
         super(id);
     }
 
+    public String getId() {
+        return super.getId();
+    }
+
+
 }

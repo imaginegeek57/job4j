@@ -14,7 +14,6 @@ public class RoleStore extends AbstractStore<Role> {
         super(arrays);
     }
 
-
     @Override
     public void add(Role model) {
         super.add(model);

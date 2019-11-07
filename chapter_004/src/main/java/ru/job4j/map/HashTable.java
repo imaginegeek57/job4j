@@ -34,16 +34,16 @@ public class HashTable<K, V> {
         }
     }
 
-//    public V get(K key) {
-//        V value = null;
-//        for (int i = 0; i < table.length; i++) {
-//            if (table[i].equals(key.hashCode())) {
-//                value = (V) table[i].getValue();
-//                break;
-//            }
-//        }
-//        return value;
-//    }
+    public V get(K key) {
+        V value = null;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i].getKey().equals(key.hashCode())) {
+                value = (V) table[i].getValue();
+                break;
+            }
+        }
+        return value;
+    }
 
     public boolean delete(K key) {
         boolean flag = false;

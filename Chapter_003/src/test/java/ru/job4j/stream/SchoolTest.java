@@ -5,10 +5,7 @@ package ru.job4j.stream;
  * @since 0.1
  */
 import org.junit.Test;
-import ru.job4j.exemple.Calculator;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 

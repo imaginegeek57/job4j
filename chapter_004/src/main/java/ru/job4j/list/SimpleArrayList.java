@@ -4,7 +4,6 @@ public class SimpleArrayList<E> {
 
     private int size;
     private Node<E> first;
-
     /**
      * Метод вставляет в начало списка данные.
      */
@@ -22,7 +21,7 @@ public class SimpleArrayList<E> {
         Node<E> tmp = this.first;
         this.first = this.first.next;
         tmp.next = null;
-        this.size--;
+        size--;
         return tmp.data;
 
     }
@@ -36,22 +35,18 @@ public class SimpleArrayList<E> {
         }
         return result.data;
     }
-
     /**
      * Метод получения размера коллекции.
      */
     public int getSize() {
         return this.size;
     }
-
     /**
      * Класс предназначен для хранения данных.
      */
     private static class Node<E> {
-
         E data;
         Node<E> next;
-
         Node(E data) {
             this.data = data;
         }

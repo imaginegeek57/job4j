@@ -15,5 +15,6 @@ public class StreamLast {
                 Arrays.asList(5, 6)
         );
         List <Integer> str = matrix.stream().flatMap(List::stream).collect(Collectors.toList());
+        str.forEach(System.out::println);
     }
 }

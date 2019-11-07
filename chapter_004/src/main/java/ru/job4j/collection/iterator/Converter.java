@@ -1,13 +1,14 @@
-package ru.job4j.collection;
+package ru.job4j.collection.iterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Converter {
-    Iterator <Integer> convert(Iterator <Iterator <Integer>> it) {
+    public Iterator <Integer> convert(Iterator <Iterator <Integer>> it) {
         return new Iterator <Integer>() {
-            private Iterator <Integer> Iterator = (new ArrayList<Integer>()).iterator();
+            private Iterator <Integer> Iterator = (new ArrayList <Integer>()).iterator();
+
             @Override
             public boolean hasNext() {
                 while (it.hasNext() && !Iterator.hasNext()) {
@@ -15,9 +16,10 @@ public class Converter {
                 }
                 return Iterator.hasNext();
             }
+
             @Override
             public Integer next() {
-                if(!hasNext()) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 return Iterator.next();

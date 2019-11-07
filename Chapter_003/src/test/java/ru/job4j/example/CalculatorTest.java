@@ -5,6 +5,8 @@ package ru.job4j.example;
  * @since 0.1
  */
 import org.junit.Test;
+import ru.job4j.exemple.Calculator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

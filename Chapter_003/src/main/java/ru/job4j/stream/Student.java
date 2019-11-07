@@ -6,7 +6,6 @@ import java.util.Objects;
 public class Student {
     private int score;
 
-
     Student(int score) {
         this.score = score;
     }
