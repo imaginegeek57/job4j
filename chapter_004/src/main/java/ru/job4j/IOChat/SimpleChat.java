@@ -1,11 +1,14 @@
 package ru.job4j.IOChat;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
-public class SimpleChat {
+public class SimpleChat implements Runnable, Closeable {
 
     /**
      * Логгер
@@ -17,16 +20,31 @@ public class SimpleChat {
      */
     private static final String STOP_WORD = "stop";
 
+    /**
+     * Имя пользователя
+     */
+    private static final String USER_NAME = "Пользователь";
+
+    /**
+     * Имя бота
+     */
+    private static final String BOT_NAME = "Бот";
+
+    /**
+     * Формат даты и времени в названии файла
+     */
+    private static final DateTimeFormatter DATETIME_IN_FILENAME = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+
+    /**
+     * Формат даты и времени в логе чата
+     */
+    private static final DateTimeFormatter DATETIME_IN_CHAT_LOG = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss");
+
     public static void main(String[] args) throws IOException {
         SimpleChat chat = new SimpleChat("randomList.txt");
         chat.run();
+        chat.close();
     }
-
-    /**
-     * Лог чата
-     * Содержит переписку
-     */
-    private List <String> chatLog = new LinkedList <>();
 
     /**
      * Ответы из файла
@@ -48,6 +66,11 @@ public class SimpleChat {
     private File answersFile;
 
     /**
+     * Запись лога в файл
+     */
+    private PrintWriter chatLogWriter;
+
+    /**
      * Конструктор
      *
      * @param answersFilePath путь к файлу с ответами
@@ -55,6 +78,7 @@ public class SimpleChat {
     public SimpleChat(String answersFilePath) throws IOException {
         this.answersFile = new File(answersFilePath);
         this.answers = readAnswersFromFile(this.answersFile);
+        this.chatLogWriter = createChatLogWriter();
     }
 
     /**
@@ -78,8 +102,32 @@ public class SimpleChat {
     }
 
     /**
+     * Создать запись лога чата в файл
+     *
+     * @return запись лога
+     * @throws IOException исключение ввода/вывода
+     */
+    private PrintWriter createChatLogWriter() throws IOException {
+        String fileName = String.format("%s_chat.log", LocalDateTime.now().format(DATETIME_IN_FILENAME));
+        return new PrintWriter(fileName, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Записать сообщение в лог
+     *
+     * @param name    автор
+     * @param message сообщение
+     */
+    private void writeToChatLog(String name, String message) {
+        this.chatLogWriter
+                .printf("[%s] %s: %s\n", LocalDateTime.now().format(DATETIME_IN_CHAT_LOG), name, message)
+                .flush();
+    }
+
+    /**
      * Запуск чата
      */
+    @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
@@ -90,10 +138,10 @@ public class SimpleChat {
         do {
 
             inputMessage = scanner.nextLine();
-            chatLog.add(inputMessage);
+            writeToChatLog(USER_NAME, inputMessage);
 
             outputMessage = getRandomAnswer();
-            chatLog.add(outputMessage);
+            writeToChatLog(BOT_NAME, outputMessage);
             System.out.println(outputMessage);
 
             System.out.println("Write your answer:");
@@ -103,7 +151,11 @@ public class SimpleChat {
 
         log.info("выход из чата");
 
-        System.out.println(chatLog);
+    }
+
+    @Override
+    public void close() {
+        this.chatLogWriter.close();
     }
 
 }
