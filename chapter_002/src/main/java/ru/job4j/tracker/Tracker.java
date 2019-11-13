@@ -8,7 +8,8 @@ package ru.job4j.tracker;
 import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
-public class Tracker {
+
+public class Tracker implements ITracker {
     /**
      * Массив для хранение заявок.
      */
@@ -60,27 +61,27 @@ public class Tracker {
             }
         }
     }
-    public boolean delete(String key) {
-        boolean res = false;
+
+    public void delete(String key) {
         for (Item it : this.items) {
             if (it.getId().equals(key)) {
                 items.remove(it);
-                res = true;
                 break;
             }
         }
-        return res;
     }
-    public List<Item> findByName(String key) {
-        List<Item> items = new ArrayList<>();
+
+    public List <Item> findByName(String key) {
+        List <Item> list = new ArrayList <>();
         for (Item it : this.items) {
             if (it.getName().equals(key)) {
                 items.add(it);
             }
         }
-        return items;
+        return list;
     }
-    public List<Item> findAll() {
+
+    public List <Item> findAll() {
         List<Item> items = new ArrayList<>();
         for (Item it : this.items) {
             items.add(it);
