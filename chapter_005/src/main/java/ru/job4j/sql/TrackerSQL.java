@@ -27,11 +27,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                     config.getProperty("username"),
                     config.getProperty("password")
             );
-
-            try (PreparedStatement statement = this.connection.prepareStatement(
-                    "create table item_store (name varchar (10), description varchar (15))")) {
-                statement.executeUpdate();
-            }
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -42,12 +37,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (PreparedStatement statement = this.connection.prepareStatement(
-                "insert into item_store (name, description) values (?, ?)")) {
+                "insert into item_store (name, description) values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, String.valueOf(item));
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println(String.format("%s %s", resultSet.getString("name"), resultSet
-                        .getString("description")));
+            statement.setString(2, String.valueOf(item));
+            statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            while (generatedKeys.next()) {
+                System.out.println(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,10 +51,24 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         return item;
     }
 
-
+    /**
+     * Метод update
+     *
+     * @param id
+     * @param item
+     */
     @Override
     public void replace(String id, Item item) {
-
+        try (PreparedStatement statement = this.connection.prepareStatement(
+                "update item_store set (id, name, description) where id=?")) {
+            statement.setString(1, String.valueOf(item));
+            statement.setString(2, String.valueOf(item));
+            statement.setString(3, String.valueOf(item));
+            statement.setString(4, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

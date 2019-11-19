@@ -10,16 +10,10 @@ import java.util.List;
  */
 
 public class Item {
-    protected static int length;
     private String id;
     private String name;
     private String description;
-    private long create;
-    private String delete;
-    private String[] comments;
 
-    public Item() {
-    }
 
     public Item(String name, String description) {
         this.name = name;
@@ -40,13 +34,6 @@ public class Item {
         return this.description;
     }
 
-    public long getCreate() {
-        return this.create;
-    }
-
-    public String[] getComments() {
-        return this.comments;
-    }
 
     public String getId() {
         return this.id;
@@ -54,10 +41,6 @@ public class Item {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getDelete() {
-        return this.delete;
     }
 
 
@@ -77,17 +60,7 @@ public class Item {
                 + description
                 + '\''
                 +
-                ", create="
-                + create
-                +
-                ", delete='"
-                + delete + '\''
-                +
-                ", comments="
-                + Arrays.toString(comments)
-                +
                 '}';
     }
-
 }
 

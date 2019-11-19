@@ -7,12 +7,20 @@ import ru.job4j.tracker.Item;
 import static org.hamcrest.Matchers.is;
 
 public class TrackerSQLTest {
+
+    TrackerSQL sql = new TrackerSQL();
+
     @Test
     public void checkConnection() {
-        TrackerSQL sql = new TrackerSQL();
         assertThat(sql.init(), is(true));
-        sql.add(new Item("1", "cde"));
-        sql.add(new Item("2", "cde"));
-        sql.add(new Item("5", "cde"));
+        sql.add(new Item("e21", "cdee", "111"));
+        sql.add(new Item("232e", "cwewde", "222"));
+        sql.add(new Item("5444", "cdeewfr", "333"));
+    }
+
+    @Test
+    public void checkMethods() {
+        sql.replace("111", new Item("Vvv", "fwfdw", "777"));
+        sql.delete("222");
     }
 }
