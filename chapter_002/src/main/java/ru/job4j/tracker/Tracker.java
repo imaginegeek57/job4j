@@ -31,15 +31,13 @@ public class Tracker implements ITracker {
         return item;
     }
     // Метод добавляет заявку по id
-    public Item findById(String id) {
-        Item result = null;
-        for (int i = 0; i < position; i++) {
-            if (items.get(i).getId().equals(id)) {
-                result = items.get(i);
-                break;
+    public boolean findById(Integer id) {
+        for (Item it : this.items) {
+            if (it.getName().equals(id)) {
+                items.add(it);
             }
         }
-        return result;
+        return true;
     }
     /**
      * Метод генерирует уникальный ключ для заявки.
@@ -47,12 +45,12 @@ public class Tracker implements ITracker {
      *
      * @return Уникальный ключ.
      */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
+    private Integer generateId() {
+        return RN.nextInt(100);
     }
 
     // Метод должен заменить ячейку в массиве this.items
-    public void replace(String id, Item item) {
+    public void replace(Integer id, Item item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(id)) {
                 items.set(i, item);
@@ -62,23 +60,25 @@ public class Tracker implements ITracker {
         }
     }
 
-    public void delete(String key) {
+
+    @Override
+    public boolean delete(Integer key) {
         for (Item it : this.items) {
             if (it.getId().equals(key)) {
                 items.remove(it);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    public List <Item> findByName(String key) {
-        List <Item> list = new ArrayList <>();
+    public boolean findByName(String key) {
         for (Item it : this.items) {
             if (it.getName().equals(key)) {
                 items.add(it);
             }
         }
-        return list;
+        return true;
     }
 
     public List <Item> findAll() {

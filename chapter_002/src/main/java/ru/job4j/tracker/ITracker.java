@@ -1,17 +1,18 @@
 package ru.job4j.tracker;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ITracker {
     Item add(Item item);
 
-    void replace(String id, Item item);
+    void replace(Integer id, Item item);
 
-    void delete(String id);
+    boolean delete(Integer id);
 
-    List <Item> findAll();
+    List <Item> findAll() throws SQLException;
 
-    List <Item> findByName(String key);
+    boolean findByName(String name);
 
-    Item findById(String id);
+    boolean findById(Integer id);
 }

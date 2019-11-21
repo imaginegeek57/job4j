@@ -10,19 +10,29 @@ import java.util.List;
  */
 
 public class Item {
-    private String id;
+    private Integer id;
     private String name;
     private String description;
 
+    public Item() {
+    }
 
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Item(String name, String description, String id) {
+    public Item(Integer id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -30,19 +40,16 @@ public class Item {
         return this.name;
     }
 
+    public String setName(String name) {
+        return this.name = name;
+    }
     public String getDescription() {
         return this.description;
     }
 
-
-    public String getId() {
-        return this.id;
+    public String setDescription(String description) {
+        return this.description = description;
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
 
     @Override
     public String toString() {
