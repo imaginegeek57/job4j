@@ -15,23 +15,55 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private static final Logger LOG = LogManager.getLogger(TrackerSQL.class);
 
+    private static final String PROPERTIES_FILE = "app.properties";
+
+    /* Параметры для подключения */
+
+    private String driverClassName;
+    private String url;
+    private String username;
+    private String password;
+
     private Connection connection;
 
-    public boolean init() {
-        LOG.debug("Initial connection to database");
-        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
+    public TrackerSQL() {
+        this.readFileProperties(PROPERTIES_FILE);
+    }
+
+    private void readFileProperties(String fileName) {
+        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream(fileName)) {
             Properties config = new Properties();
             config.load(in);
-            Class.forName(config.getProperty("driver-class-name"));
-            this.connection = DriverManager.getConnection(
-                    config.getProperty("url"),
-                    config.getProperty("username"),
-                    config.getProperty("password")
-            );
+
+            this.driverClassName = config.getProperty("driver-class-name");
+            this.url = config.getProperty("url");
+            this.username = config.getProperty("username");
+            this.password = config.getProperty("password");
+
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-        return this.connection != null;
+    }
+
+    public void connect() {
+        LOG.debug("Connect to database");
+        try {
+            Class.forName(this.driverClassName);
+            this.connection = DriverManager.getConnection(this.url, this.username, this.password);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public boolean isConnected() {
+        return connection != null;
+    }
+
+    private Connection getConnection() {
+        if (!isConnected()) {
+            connect();
+        }
+        return connection;
     }
 
     private Item forResultSet(ResultSet rs) throws SQLException {
@@ -45,7 +77,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "insert into item_store (name, description) values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, String.valueOf(item.getName()));
             statement.setString(2, String.valueOf(item.getDescription()));
@@ -61,14 +93,15 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     /**
      * Метод update
-     *  @param id
+     *
+     * @param id
      * @param item
      * @return
      */
     @Override
     public void replace(Integer id, Item item) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
-                "update item_store set (name, description) where id = ?")) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
+                "update item_store set (name = ?, description = ?) where id = ?")) {
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
             statement.setInt(3, id);
@@ -80,7 +113,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public boolean delete(Integer id) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "delete from item_store where column = id)")) {
             statement.setInt(1, id);
             int i = statement.executeUpdate();
@@ -96,7 +129,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List <Item> findAll() throws SQLException {
         List <Item> list = new ArrayList <>();
-        try (PreparedStatement statement = this.connection.prepareStatement(
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "select * from item_store")) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -109,7 +142,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public boolean findByName(String name) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "select from item_store where column = name)")) {
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
@@ -125,7 +158,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public boolean findById(Integer id) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "select from item_store where column = id)")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -140,8 +173,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
-        LOG.debug("Close connection to database");
-        this.connection.close();
+    public void close() throws SQLException {
+        if (isConnected()) {
+            LOG.debug("Close connection to database");
+            this.connection.close();
+            this.connection = null;
+        }
     }
 }
