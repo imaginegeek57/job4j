@@ -12,7 +12,7 @@ public interface ITracker {
 
     List <Item> findAll() throws SQLException;
 
-    boolean findByName(String name);
+    List <Item> findByName(String name);
 
-    boolean findById(Integer id);
+    List <Item> findById(Integer id);
 }

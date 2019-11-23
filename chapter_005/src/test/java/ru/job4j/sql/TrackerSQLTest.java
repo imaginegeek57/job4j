@@ -14,7 +14,6 @@ public class TrackerSQLTest {
 
     @Test
     public void checkConnection() {
-        assertThat(sql.init(), is(true));
         sql.add(new Item(12, "e4de", "idke"));
         sql.add(new Item(3, "ed6", "id54ke"));
         sql.add(new Item(8, "ed3e", "f3idke"));
@@ -23,8 +22,11 @@ public class TrackerSQLTest {
 
     @Test
     public void checkMethods() throws SQLException {
-        sql.replace(8, new Item(2, "edeew", "idkwre"));
-        sql.delete(3);
-        //   sql.findAll();
+        sql.replace(8, new Item("edeew", "idkwre"));
+        //  sql.delete(2);
+        //  sql.findAll();
+        //  sql.findById(10);
+        // sql.findByName("222");
+        sql.close();
     }
 }
