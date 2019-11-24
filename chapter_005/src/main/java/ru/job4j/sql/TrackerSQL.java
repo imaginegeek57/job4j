@@ -12,6 +12,16 @@ import java.util.List;
 
 public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
 
+    public void create() {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
+                "create table if not exists sitem_store(id serial primary key, " +
+                        "name character (2000), description character (2000)")) {
+            statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Item forResultSet(ResultSet rs) throws SQLException {
         Item item = new Item();
         item.setId(rs.getInt("id"));
@@ -38,15 +48,14 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
      *
      * @param id
      * @param item
-     * @return
      */
     @Override
     public void replace(Integer id, Item item) {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "update item_store set (name = ?, description = ?) where id = ?")) {
-            statement.setString(2, item.getName());
-            statement.setString(3, item.getDescription());
-            statement.setInt(1, id);
+                "update item_store set name = ?, description = ? where id = ?")) {
+            statement.setString(1, item.getName());
+            statement.setString(2, item.getDescription());
+            statement.setInt(3, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +65,7 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
     @Override
     public boolean delete(Integer id) {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "delete from item_store where column = id")) {
+                "delete from item_store where id = ?")) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -84,14 +93,13 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
     public List <Item> findByName(String name) {
         List <Item> list = new ArrayList <>();
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "select * from item_store where column = name")) {
+                "select from item_store as i where i.name = ?")) {
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Item item = forResultSet(rs);
                 list.add(item);
                 System.out.println(list);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,20 +108,17 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
     }
 
     @Override
-    public List <Item> findById(Integer id) {
-        List <Item> list = new ArrayList <>();
+    public Item findById(Integer id) {
+        Item item = new Item();
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "select from item_store where column = id")) {
+                "select from item_store as i where i.id = ?")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Item item = forResultSet(rs);
-                list.add(item);
-                System.out.println(list);
-            }
+            item = forResultSet(rs);
+            System.out.println(item);
         } catch (SQLException e) {
         }
-        return list;
+        return item;
     }
 
     @Override

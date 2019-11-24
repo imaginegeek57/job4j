@@ -22,11 +22,12 @@ public class TrackerSQLTest {
 
     @Test
     public void checkMethods() throws SQLException {
-        sql.replace(8, new Item("edeew", "idkwre"));
-        //  sql.delete(2);
-        //  sql.findAll();
-        //  sql.findById(10);
-        // sql.findByName("222");
+        sql.create();
+        //    sql.replace(10, new Item("111UUUU", "111FFGT"));
+        // sql.delete(2);
+        //     sql.findAll();
+        //   sql.findById(10);
+        //    sql.findByName("333");
         sql.close();
     }
 }

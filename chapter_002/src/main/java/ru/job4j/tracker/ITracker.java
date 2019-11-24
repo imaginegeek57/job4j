@@ -14,5 +14,5 @@ public interface ITracker {
 
     List <Item> findByName(String name);
 
-    List <Item> findById(Integer id);
+    Item findById(Integer id);
 }
