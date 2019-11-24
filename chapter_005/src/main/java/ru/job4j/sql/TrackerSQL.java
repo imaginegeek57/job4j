@@ -14,8 +14,8 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
 
     public void create() {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "create table if not exists sitem_store(id serial primary key, " +
-                        "name character (2000), description character (2000)")) {
+                "create table if not exists item_store(id serial primary key, " +
+                        "name varchar (2000), description varchar (2000)")) {
             statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,6 +37,11 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
             statement.setString(1, String.valueOf(item.getName()));
             statement.setString(2, String.valueOf(item.getDescription()));
             statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                while (generatedKeys.next()) {
+                    item.setId(generatedKeys.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
