@@ -31,13 +31,13 @@ public class Tracker implements ITracker {
         return item;
     }
     // Метод добавляет заявку по id
-    public boolean findById(Integer id) {
+    public Item findById(Integer id) {
         for (Item it : this.items) {
             if (it.getName().equals(id)) {
                 items.add(it);
             }
         }
-        return true;
+        return (Item) items;
     }
     /**
      * Метод генерирует уникальный ключ для заявки.
@@ -72,21 +72,24 @@ public class Tracker implements ITracker {
         return false;
     }
 
-    public boolean findByName(String key) {
+
+    @Override
+    public List <Item> findByName(String name) {
         for (Item it : this.items) {
-            if (it.getName().equals(key)) {
+            if (it.getName().equals(name)) {
                 items.add(it);
             }
         }
-        return true;
+        return items;
     }
 
+    @Override
     public List <Item> findAll() {
         List<Item> items = new ArrayList<>();
         for (Item it : this.items) {
             items.add(it);
         }
-            return items;
+        return items;
     }
 }
 

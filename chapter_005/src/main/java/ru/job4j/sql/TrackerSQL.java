@@ -13,10 +13,9 @@ import java.util.List;
 public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
 
     public void create() {
-        try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "create table if not exists item_store(id serial primary key, " +
-                        "name varchar (2000), description varchar (2000)")) {
-            statement.executeQuery();
+        try (Statement statement = this.getConnection().createStatement()) {
+            statement.execute("create table if not exists item_store(id serial primary key, " +
+                    "name varchar (2000), description varchar (2000))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,7 +87,6 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
             while (rs.next()) {
                 Item item = forResultSet(rs);
                 list.add(item);
-                System.out.println(list);
             }
             return list;
         }
@@ -104,7 +102,6 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
             while (rs.next()) {
                 Item item = forResultSet(rs);
                 list.add(item);
-                System.out.println(list);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,7 +117,6 @@ public class TrackerSQL extends SQLManager implements ITracker, AutoCloseable {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             item = forResultSet(rs);
-            System.out.println(item);
         } catch (SQLException e) {
         }
         return item;
