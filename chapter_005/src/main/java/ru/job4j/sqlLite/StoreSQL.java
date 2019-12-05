@@ -12,11 +12,30 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     public void create() {
         try (Statement statement = getConnection().createStatement()) {
-            statement.execute("create table if not exists tab(id serial primary key, " +
-                    "entry varchar(2000))");
+            statement.execute("create table if not exists cars(id serial primary key, " +
+                    "name varchar (2000), power integer, numberOfCar integer,  description varchar (2000))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Car add(Car car) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
+                "insert into cars(name, power, numberOfCar, description) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, car.getName());
+            statement.setInt(2, car.getPower());
+            statement.setInt(3, car.getNumberOfCar());
+            statement.setString(4, car.getDescription());
+            statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                while (generatedKeys.next()) {
+                    generatedKeys.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return car;
     }
 
     public void generate(int size) {
@@ -33,25 +52,6 @@ public class StoreSQL extends Config implements AutoCloseable {
             LOG.debug("Close connection to database");
             this.connection.close();
             this.connection = null;
-        }
-    }
-
-    public void add() {
-        try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "insert into tab(entry) values (?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, "enum1");
-            statement.setString(1, "enum2");
-            statement.setString(1, "enum3");
-            statement.setString(1, "enum4");
-            statement.setString(1, "enum5");
-            statement.executeUpdate();
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                while (generatedKeys.next()) {
-                    generatedKeys.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
