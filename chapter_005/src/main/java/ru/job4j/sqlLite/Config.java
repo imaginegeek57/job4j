@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class Config {
 
+
     protected static final Logger LOG = LogManager.getLogger(Config.class);
 
     protected Connection connection;

@@ -28,6 +28,7 @@ public class CreateNewSQLLite {
         }
     }
 
+
     /**
      * @param args the command line arguments
      */

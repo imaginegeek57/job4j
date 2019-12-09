@@ -21,11 +21,12 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     public Car add(Car car) {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "insert into cars(name, power, numberOfCar, description) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, car.getName());
-            statement.setInt(2, car.getPower());
-            statement.setInt(3, car.getNumberOfCar());
-            statement.setString(4, car.getDescription());
+                "insert into cars(id, name, power, numberOfCar, description) values (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, car.getId());
+            statement.setString(2, car.getName());
+            statement.setInt(3, car.getPower());
+            statement.setInt(4, car.getNumberOfCar());
+            statement.setString(5, car.getDescription());
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 while (generatedKeys.next()) {
@@ -39,6 +40,13 @@ public class StoreSQL extends Config implements AutoCloseable {
     }
 
     public void generate(int size) {
+        create();
+        add(new Car(1, "aa", 12, 124, "AAA"));
+        add(new Car(2, "bb", 13, 125, "BBB"));
+        add(new Car(3, "cc", 14, 126, "CCC"));
+        add(new Car(4, "dd", 15, 127, "DDD"));
+        add(new Car(5, "ee", 16, 128, "EEE"));
+        LOG.info("add data");
 
     }
 
@@ -53,6 +61,9 @@ public class StoreSQL extends Config implements AutoCloseable {
             this.connection.close();
             this.connection = null;
         }
+    }
+
+    public static void main(String[] args) {
     }
 
 }
