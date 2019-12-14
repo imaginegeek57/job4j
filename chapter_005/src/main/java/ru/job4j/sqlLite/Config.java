@@ -5,34 +5,53 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Properties;
 
 public class Config {
 
-
-    protected static final Logger LOG = LogManager.getLogger(Config.class);
+    public static Logger LOG = LogManager.getLogger(Config.class);
 
     protected Connection connection;
 
     private static final String PROPERTIES_FILE = "sqlLite.properties";
 
-    public void init() {
-        try (InputStream in = Config.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+    private String url;
+
+    public Config() {
+        this.init(PROPERTIES_FILE);
+    }
+
+    private void init(String file) {
+        try (InputStream in = Config.class.getClassLoader().getResourceAsStream(file)) {
             Properties values = new Properties();
             values.load(in);
 
+            this.url = values.getProperty("url");
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
     }
 
-    public boolean isConnected() {
+    public void connect() {
+        LOG.debug("CreateNewDB to database");
+        try {
+            Class.forName("org.sqlite.JDBC");
+            this.connection = DriverManager.getConnection(this.url);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+
+    protected boolean isConnected() {
         return connection != null;
     }
 
-    protected Connection getConnection() {
+    public Connection getConnection() {
+        LOG.debug("Connection to SQLite has been established");
         if (!isConnected()) {
-            init();
+            connect();
         }
         return connection;
     }

@@ -5,7 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class CreateNewSQLLite {
+public class CreateNewDB {
 
     /**
      * Connect to a sample database
@@ -14,7 +14,7 @@ public class CreateNewSQLLite {
      */
     public static void createNewDatabase(String fileName) {
 
-        String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
+        String url = "jdbc:sqlite:C:/sqlite/" + fileName;
 
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
@@ -28,12 +28,10 @@ public class CreateNewSQLLite {
         }
     }
 
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        createNewDatabase("sqlLite.db");
+        createNewDatabase("light.db");
     }
 }
-

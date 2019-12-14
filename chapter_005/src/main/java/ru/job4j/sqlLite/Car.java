@@ -9,11 +9,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Car {
 
     private int id;
-
     private String name;
     private int power;
     private int numberOfCar;
     private String description;
+
+    public Car() {
+    }
 
     public Car(int id, String name, int power, int numberOfCar, String description) {
         this.id = id;
@@ -21,9 +23,6 @@ public class Car {
         this.power = power;
         this.numberOfCar = numberOfCar;
         this.description = description;
-    }
-
-    public Car() {
     }
 
     public int getId() {

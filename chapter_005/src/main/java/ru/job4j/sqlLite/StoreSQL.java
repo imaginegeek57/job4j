@@ -39,7 +39,7 @@ public class StoreSQL extends Config implements AutoCloseable {
         return car;
     }
 
-    public void generate(int size) {
+    public void generate() {
         create();
         add(new Car(1, "aa", 12, 124, "AAA"));
         add(new Car(2, "bb", 13, 125, "BBB"));
@@ -50,7 +50,7 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     }
 
-    public List <KeyStore.Entry> load() {
+    public List <Car> load() {
         return Collections.EMPTY_LIST;
     }
 

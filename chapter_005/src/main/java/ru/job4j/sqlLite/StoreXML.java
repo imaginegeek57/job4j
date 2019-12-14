@@ -1,21 +1,12 @@
 package ru.job4j.sqlLite;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UTFDataFormatException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,13 +23,17 @@ public class StoreXML extends Config {
         return car;
     }
 
+    public StoreXML() throws SQLException {
+        this.addData();
+    }
+
     /**
      * Запись данных из БД в List
      *
      * @return
      * @throws SQLException
      */
-    public List <Car> findAll() throws SQLException {
+    public List <Car> addData() throws SQLException {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "select * from cars")) {
             ResultSet rs = statement.executeQuery();
@@ -46,7 +41,29 @@ public class StoreXML extends Config {
                 Car car = forResultSet(rs);
                 list.add(car);
             }
+            LOG.info("Data add to list");
             return list;
         }
     }
+
+
+    public static void convert() throws JAXBException {
+        File file = new File("sqlLog.xml");
+        JAXBContext jaxbContext = JAXBContext.newInstance(Car.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+        // output pretty printed
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        for (Car car : list) {
+            jaxbMarshaller.marshal(car, file);
+            jaxbMarshaller.marshal(car, System.out);
+            LOG.info("Data has converted to xml");
+        }
+
+    }
+
 }
+
+
+
