@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class Config {
@@ -22,6 +24,16 @@ public class Config {
         this.init(PROPERTIES_FILE);
     }
 
+    public Car forResultSet(ResultSet rs) throws SQLException {
+        Car car = new Car();
+        car.setId(rs.getInt("id"));
+        car.setName(rs.getString("name"));
+        car.setPower(rs.getInt("power"));
+        car.setNumberOfCar(rs.getInt("numberOfCar"));
+        car.setDescription(rs.getString("description"));
+        return car;
+    }
+
     private void init(String file) {
         try (InputStream in = Config.class.getClassLoader().getResourceAsStream(file)) {
             Properties values = new Properties();
@@ -34,13 +46,14 @@ public class Config {
     }
 
     public void connect() {
-        LOG.debug("CreateNewDB to database");
+        LOG.debug("connect to database");
         try {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection(this.url);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
+
     }
 
 

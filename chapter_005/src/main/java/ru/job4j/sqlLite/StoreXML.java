@@ -12,16 +12,7 @@ import java.util.List;
 
 public class StoreXML extends Config {
 
-    protected static List <Car> list = new LinkedList <>();
-
-    public Car forResultSet(ResultSet rs) throws SQLException {
-        Car car = new Car();
-        car.setName(rs.getString("name"));
-        car.setPower(rs.getInt("power"));
-        car.setNumberOfCar(rs.getInt("numberOfCar"));
-        car.setDescription(rs.getString("description"));
-        return car;
-    }
+    public static List <Car> list = new LinkedList <>();
 
     public StoreXML() throws SQLException {
         this.addData();
@@ -34,6 +25,7 @@ public class StoreXML extends Config {
      * @throws SQLException
      */
     public List <Car> addData() throws SQLException {
+        list.clear();
         try (PreparedStatement statement = this.getConnection().prepareStatement(
                 "select * from cars")) {
             ResultSet rs = statement.executeQuery();
@@ -48,19 +40,16 @@ public class StoreXML extends Config {
 
 
     public static void convert() throws JAXBException {
-        File file = new File("sqlLog.xml");
+        File file = new File("C:\\projects\\job4j\\chapter_005\\src\\main\\resources\\sqlLog.xml");
         JAXBContext jaxbContext = JAXBContext.newInstance(Car.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         // output pretty printed
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        for (Car car : list) {
-            jaxbMarshaller.marshal(car, file);
-            jaxbMarshaller.marshal(car, System.out);
-            LOG.info("Data has converted to xml");
-        }
-
+        jaxbMarshaller.marshal(list.get(1), file);
+        jaxbMarshaller.marshal(list.get(1), System.out);
+        LOG.info("Data has converted to xml");
     }
 
 }

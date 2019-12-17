@@ -43,7 +43,7 @@ public class SQLManager {
     }
 
     public void connect() {
-        LOG.debug("Connect to database");
+        LOG.debug("CreateNewDB to database");
         try {
             Class.forName(this.driverClassName);
             this.connection = DriverManager.getConnection(this.url, this.username, this.password);

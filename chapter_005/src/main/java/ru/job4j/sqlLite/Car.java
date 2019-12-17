@@ -29,7 +29,7 @@ public class Car {
         return id;
     }
 
-    @XmlAttribute
+    @XmlElement
     public void setId(int id) {
         this.id = id;
     }
