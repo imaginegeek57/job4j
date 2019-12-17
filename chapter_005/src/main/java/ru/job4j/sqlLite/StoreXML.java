@@ -1,54 +1,30 @@
 package ru.job4j.sqlLite;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
-public class StoreXML extends Config {
+public class StoreXML {
 
-    public static List <Car> list = new LinkedList <>();
+    private static final Logger LOG = LogManager.getLogger(StoreXML.class);
 
-    public StoreXML() throws SQLException {
-        this.addData();
-    }
-
-    /**
-     * Запись данных из БД в List
-     *
-     * @return
-     * @throws SQLException
-     */
-    public List <Car> addData() throws SQLException {
-        list.clear();
-        try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "select * from cars")) {
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Car car = forResultSet(rs);
-                list.add(car);
-            }
-            LOG.info("Data add to list");
-            return list;
-        }
-    }
-
-
-    public static void convert() throws JAXBException {
+    public void convert(List <Car> cars) throws JAXBException {
         File file = new File("C:\\projects\\job4j\\chapter_005\\src\\main\\resources\\sqlLog.xml");
-        JAXBContext jaxbContext = JAXBContext.newInstance(Car.class);
+        CarList carList = new CarList();
+        carList.setCarList(cars);
+        JAXBContext jaxbContext = JAXBContext.newInstance(CarList.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         // output pretty printed
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        jaxbMarshaller.marshal(list.get(1), file);
-        jaxbMarshaller.marshal(list.get(1), System.out);
+        jaxbMarshaller.marshal(carList, file);
+        jaxbMarshaller.marshal(carList, System.out);
         LOG.info("Data has converted to xml");
     }
 

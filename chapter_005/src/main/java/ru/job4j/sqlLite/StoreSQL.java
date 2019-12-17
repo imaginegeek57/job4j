@@ -1,15 +1,29 @@
 package ru.job4j.sqlLite;
 
-import java.security.KeyStore;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class StoreSQL extends Config implements AutoCloseable {
+
+    private static final Logger LOG = LogManager.getLogger(StoreSQL.class);
+
+    public Car forResultSet(ResultSet rs) throws SQLException {
+        Car car = new Car();
+        car.setId(rs.getInt("id"));
+        car.setName(rs.getString("name"));
+        car.setPower(rs.getInt("power"));
+        car.setNumberOfCar(rs.getInt("numberOfCar"));
+        car.setDescription(rs.getString("description"));
+        return car;
+    }
 
     public void drop() {
         try (Statement statement = getConnection().createStatement()) {
@@ -21,7 +35,7 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     public void create() {
         try (Statement statement = getConnection().createStatement()) {
-            statement.execute("create table if not exists cars(id serial primary key, " +
+            statement.execute("create table if not exists cars(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "name varchar (2000), power integer, numberOfCar integer,  description varchar (2000))");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,12 +44,11 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     public Car add(Car car) {
         try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "insert into cars(id, name, power, numberOfCar, description) values (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, car.getId());
-            statement.setString(2, car.getName());
-            statement.setInt(3, car.getPower());
-            statement.setInt(4, car.getNumberOfCar());
-            statement.setString(5, car.getDescription());
+                "insert into cars(name, power, numberOfCar, description) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, car.getName());
+            statement.setInt(2, car.getPower());
+            statement.setInt(3, car.getNumberOfCar());
+            statement.setString(4, car.getDescription());
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 while (generatedKeys.next()) {
@@ -50,26 +63,13 @@ public class StoreSQL extends Config implements AutoCloseable {
 
     public void generate(int size) {
         create();
-//        add(new Car(1, "aa", 12, 124, "AAA"));
-//        add(new Car(2, "bb", 13, 125, "BBB"));
-//        add(new Car(3, "cc", 14, 126, "CCC"));
-//        add(new Car(4, "dd", 15, 127, "DDD"));
-//        add(new Car(5, "ee", 16, 128, "EEE"));
-        try (PreparedStatement statement = this.getConnection().prepareStatement(
-                "insert into cars(id, name, power, numberOfCar, description) values (?, ?, ?, ?, ?)")) {
-            this.getConnection().setAutoCommit(false);
-            for (int i = 1; i < size + 1; i++) {
-                statement.setInt(1, i);
-                statement.setString(2, String.valueOf(i));
-                statement.setInt(3, i);
-                statement.setInt(4, i);
-                statement.setString(5, String.valueOf(i));
-                statement.addBatch();
-            }
-            statement.executeBatch();
-            this.getConnection().setAutoCommit(true);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (int i = 1; i < size + 1; i++) {
+            Car car = new Car();
+            car.setName(String.format("Авто #%d", i));
+            car.setPower(i * 2);
+            car.setNumberOfCar(i);
+            car.setDescription(String.format("Описание к авто #%d", i));
+            add(car);
         }
     }
 
@@ -86,8 +86,24 @@ public class StoreSQL extends Config implements AutoCloseable {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Запись данных из БД в List
+     *
+     * @return
+     * @throws SQLException
+     */
+    public List <Car> addData() throws SQLException {
+        List <Car> list = new LinkedList <>();
+        try (PreparedStatement statement = this.getConnection().prepareStatement(
+                "select * from cars")) {
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Car car = forResultSet(rs);
+                list.add(car);
+            }
+            LOG.info("Data add to list");
+            return list;
+        }
     }
-
 }
 

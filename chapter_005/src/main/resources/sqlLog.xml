@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Car>
-    <description>2</description>
-    <id>2</id>
-    <name>2</name>
-    <numberOfCar>2</numberOfCar>
-    <power>2</power>
-</Car>
+<Cars>
+    <carList>
+        <description>Описание к авто #1</description>
+        <id>1</id>
+        <name>Авто #1</name>
+        <numberOfCar>1</numberOfCar>
+        <power>2</power>
+    </carList>
+    <carList>
+        <description>Описание к авто #2</description>
+        <id>2</id>
+        <name>Авто #2</name>
+        <numberOfCar>2</numberOfCar>
+        <power>4</power>
+    </carList>
+</Cars>

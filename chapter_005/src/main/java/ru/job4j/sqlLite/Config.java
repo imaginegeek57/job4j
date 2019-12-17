@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class Config {
 
-    public static Logger LOG = LogManager.getLogger(Config.class);
+    private static final Logger LOG = LogManager.getLogger(Config.class);
 
     protected Connection connection;
 
@@ -24,15 +24,6 @@ public class Config {
         this.init(PROPERTIES_FILE);
     }
 
-    public Car forResultSet(ResultSet rs) throws SQLException {
-        Car car = new Car();
-        car.setId(rs.getInt("id"));
-        car.setName(rs.getString("name"));
-        car.setPower(rs.getInt("power"));
-        car.setNumberOfCar(rs.getInt("numberOfCar"));
-        car.setDescription(rs.getString("description"));
-        return car;
-    }
 
     private void init(String file) {
         try (InputStream in = Config.class.getClassLoader().getResourceAsStream(file)) {
