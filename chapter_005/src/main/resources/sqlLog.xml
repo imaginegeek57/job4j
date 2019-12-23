@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Cars>
+
+<Cars xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+      xs:noNamespaceSchemaLocation="sqlLog.xsd">
+
     <carList>
-        <description>Описание к авто #1</description>
         <id>1</id>
         <name>Авто #1</name>
         <numberOfCar>1</numberOfCar>
         <power>2</power>
+        <description>Описание к авто #1</description>
     </carList>
     <carList>
-        <description>Описание к авто #2</description>
         <id>2</id>
         <name>Авто #2</name>
         <numberOfCar>2</numberOfCar>
         <power>4</power>
+        <description>Описание к авто #2</description>
     </carList>
 </Cars>
