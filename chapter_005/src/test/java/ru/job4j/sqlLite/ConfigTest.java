@@ -14,20 +14,10 @@ public class ConfigTest {
     StoreSQL storeSQL = new StoreSQL();
     StoreXML storeXML = new StoreXML();
 
-    public ConfigTest() throws SQLException {
-    }
-
-    @Test
-    public void connect() {
-        assertThat(config.getConnection(), is(true));
-
-    }
-
-
     @Test
     public void convertToXML() throws SQLException, JAXBException {
         storeSQL.drop();
-        storeSQL.generate(2);
+        storeSQL.generate(3);
         storeXML.convert(storeSQL.addData());
     }
 }
